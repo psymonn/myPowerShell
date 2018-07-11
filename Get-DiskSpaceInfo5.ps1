@@ -55,5 +55,5 @@ function Get-DiskSpaceInfo5 {
 #ByValue won't work but byProperty works; see NoteProperty below ComputerName and DriverType
 # GetType      Method       type GetType()
 # ToString     Method       string ToString()
-# ComputerName NoteProperty System.String ComputerName=DESKTOP-N5523PQ
+# ComputerName NoteProperty System.String ComputerName=DESKTOP-NAME
 # DriveType    NoteProperty System.String DriveType=local
