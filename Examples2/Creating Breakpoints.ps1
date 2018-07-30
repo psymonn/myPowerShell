@@ -1,0 +1,1 @@
+﻿Set-PSBreakpoint -Script 'C:\SampleBreakpointScript.ps1' -Line 3

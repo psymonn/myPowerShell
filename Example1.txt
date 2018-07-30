@@ -1,0 +1,36 @@
+
+#function to add modules to environment path PSModulePath for global use
+function add-vmwareModules {
+    $p = [Environment]::GetEnvironmentVariable(("PSModulePath"))
+    $p += ";C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Modules\"
+    [Environment]::SetEnvironmentVariable("PSModule",$p)
+}
+
+add-vmwareModules
+
+$env:PSModulePath
+
+function vmware-commands {
+    $commands = Get-Command |where {($_.ModuleName -like "vmware*")};
+    $commands
+    $commands.count
+}
+
+vmware-commands
+
+#for powerCLI 5.5 and older
+add-pssnapin vmware.vimautomation.core
+
+#for powerCLI 6.5
+Import-Module vmware.vimautomation.core
+
+$cred= Get-Credential administrator@vsphere.local
+
+Connect-VIServer 172.17.5.140 -cred $cred
+$vms = get-vm -name *
+#$vms|select *|ft
+
+$vms | ConvertTo-Html | out-file 'd:\scripts\vmreport.html'
+notepad 'd:\scripts\vmreport.html'
+
+Start-Process 'd:\scripts\vmreport.html'
