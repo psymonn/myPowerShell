@@ -53,9 +53,9 @@ Fuction Import-VdiskToPVS {
 
             #Choose Device Collection e.g Staging
             #Create a new Target Device give it a name; allocate mac address; type: Test; Boot from: vDisk; Port: 6901
-            New-PvsDevice -SiteName D21A_0  -CollectionName $CollectionName -DeviceName WIN10PVS-01 -DeviceMac “00-00-00-00-00-00”
+            New-PvsDevice -SiteName Chicago  -CollectionName $CollectionName -DeviceName WIN10PVS-01 -DeviceMac “00-00-00-00-00-00”
 
-            #Add vDisks for this devices \\cifs-siepd21nft3020.dpesit.protectedsit.mil.au\siepd21pvt10_stage01\Staging\WIN10-vDisk-PVS-01.vhdx
+            #Add vDisks for this devices
             Add-PvsDiskLocatorToDevice -Name $DestVhdxFile -CollectionName $CollectionName -SiteName theSite -StoreName $store
 
           }Catch{
