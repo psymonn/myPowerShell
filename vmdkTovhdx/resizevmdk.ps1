@@ -40,11 +40,6 @@ Function Resize-VMDK{
 	
 
 ====================================================================
-	Author:
-	Conrad Ramos <conrad@vnoob.com> http://www.vnoob.com/
-
-	Date:			2012-10-23
-	Revision: 		1.0
 	
 	Disclaimer:
 	With this function you can easily corrupt and VM partition by resizing the VMDK for a greater amount than you should. Please be careful, you have been warned, and I am not responsible if you corrupt any/all of your VMs.
@@ -113,23 +108,23 @@ Remove-PSDrive -Name vDS -erroraction silentlycontinue
 new-psdrive -name vDS -location (get-datastore $ds) -psprovider vimdatastore -root '/' |out-null
 #Copy VMDK Locally
 
-copy-datastoreitem -item vDS:$file -destination $local
+#copy-datastoreitem -item vDS:$file -destination $local
 
 #Create Backup of VMDK
 $date=get-date -format yyyyMMddhhmmss
-Copy-Item $local/$vmdk $local/"Backup"$date$vmdk -Confirm
+#Copy-Item $local/$vmdk $local/"Backup"$date$vmdk -Confirm
 
 #Find the Current size setting and replace it
+<#
 [string]$string=(get-content $local\$vmdk)
 $array=$string -split "\s+"
 $num=[array]::indexof($array, $RW)
 $string.replace("$($array[$num+1])", "$size")|set-content $local\$vmdk
-
+#>
 #Copy the vmdk back up to its rightfull place
-Copy-DatastoreItem -item $local\$vmdk -destination vDS:$file -confirm
-
+#Copy-DatastoreItem -item $local\$vmdk -destination vDS:$file -confirm
 
 }
 
 
-resize-vmdk -vm E:\Vmware\Win10 -local E:\Win10vDiskVmdkToVhdx -newsizeGB 15
+resize-vmdk -vm 'WIN10PVSVDI-01' -local E:\Win10vDiskVmdkToVhdx -newsizeGB 3
