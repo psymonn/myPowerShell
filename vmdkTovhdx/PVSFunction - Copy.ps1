@@ -17,14 +17,18 @@ Function Import-VdiskToPVS {
     #pvs server test
     if (Test-Connection $ComputerName -Quiet -Count 2) {
         Try{
-            #read-host -assecurestring | convertfrom-securestring | out-file F:\scripts\Credential\PVScred.txt
-            $pass = get-content F:\scripts\Credential\PVScred.txt | convertto-securestring
-            $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist "redink\administrator",$pass
+            if ($ssl) {
+                #read-host -assecurestring | convertfrom-securestring | out-file F:\scripts\Credential\PVScred.txt
+                $pass = get-content F:\scripts\Credential\PVScred.txt | convertto-securestring
+                $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist "redink\administrator",$pass
+                $option = New-PSSessionOption -SkipCNCheck
+                $pvs = New-PSSession -computerName pvc-01 -SessionOption $option -Credential $cred -usessl
+                #$pvs = New-PSSession -computerName pvc-01 -SessionOption $option -Credential redink\administrator -usessl
+             }else{
+                #$pvs = New-PSSession -ComputerName pvc-01.redink.com -Credential (Get-Credential)
+                $pvs = New-PSSession -ComputerName pvc-01 -Credential redink\administrator
+             }
 
-            #$pvs = New-PSSession -ComputerName pvc-01.redink.com -Credential (Get-Credential)
-            #$pvs = New-PSSession -computerName pvc-01 -SessionOption $option -Credential redink\administrator -usessl
-            $option = New-PSSessionOption -SkipCNCheck
-            $pvs = New-PSSession -computerName pvc-01 -SessionOption $option -Credential $cred -usessl
             try{
                 Invoke-Command -Session $pvs -ScriptBlock {Import-Module "C:\Program Files\Citrix\Provisioning Services Console\Citrix.PVS.SnapIn.dll"}
                 Import-PSSession -Session $pvs -Module Citrix.PVS.SnapIn
@@ -32,7 +36,8 @@ Function Import-VdiskToPVS {
 
                 Write-Warning "Proxy creation has been skipped for the following command"
                 Write-Warning ("Proxy creation has been skipped because this moudle already loaded from different session : $getExceptionType $($_.Exception.message)")
-                Remove-PSSession -Session $pvs -Module Citrix.PVS.SnapIn
+                #Remove-PSSession -Session $pvs -Module Citrix.PVS.SnapIn
+                Remove-Module Citrix.PVS.SnapIn
                 Import-PSSession -Session $pvs -Module Citrix.PVS.SnapIn
             }
 
@@ -42,11 +47,11 @@ Function Import-VdiskToPVS {
             $store=$wrkPVSStore.StoreName
 
             #Create meta data for the new vDisk
-            $newPvsLocator = New-PvsDiskLocator -Name $vdiskFile -StoreName Automation -ServerName $ComputerName -SiteName chicago -VHDX -Action stop
+            $newPvsLocator = New-PvsDiskLocator -Name $vdiskFile -StoreName Automation -ServerName $ComputerName -SiteName chicago -VHDX -errorAction stop
 
             #Add or Import Existing vDisk; search for vDisk; choose the vDisk and Select Add
             #You must bein VHDX otherwise PVP file will not be created.
-            $importPVSDisk = Import-PvsDisk -DiskLocatorName $newPvsLocator.Name -StoreName $store -SiteName $siteName -ServerName $ComputerName -Enabled -VHDX -Action stop
+            $importPVSDisk = Import-PvsDisk -DiskLocatorName $newPvsLocator.Name -StoreName $store -SiteName $siteName -ServerName $ComputerName -Enabled -VHDX -errorAction stop
 
             #Choose Device Collection e.g Staging
             #Create a new Target Device give it a name; allocate mac address; type: Test; Boot from: vDisk; Port: 6901
