@@ -1,0 +1,20 @@
+﻿$source = @" 
+using System.Management.Automation;
+[Cmdlet("Say", "Hi")]
+public class HelloWorldCmdlet : Cmdlet {
+ [Parameter]    public string P1;
+ string helloworld = "Hello World";
+ protected override void ProcessRecord()  {
+    if (P1 != null)
+         {WriteObject(P1 + ":" + helloworld);}
+    else 
+         {WriteObject(helloworld);}  }}
+"@
+# Add the type and use the cmdlet
+(Add-Type -TypeDefinition $source -PassThru).Assembly | Import-Module
+# Use the cmdlets!
+Say-Hi
+Say-Hi –p1 foo
+Get-Command Say-Hi | format-list
+Get-Help say-hi
+# end Demo 3-2

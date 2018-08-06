@@ -1,0 +1,53 @@
+#
+#  Demo 5-3 - Comment Based Help
+#
+# Change to demo folder and look at what is there
+cd demo:\m5demos
+ls
+cls
+#
+# Look at a script with comment based help
+cat .\help1.ps1
+#
+#
+# Run the script - nothing particularly special
+.\help1.ps1
+cls
+#
+# Now get help
+get-help .\help1.ps1
+cls
+get-help .\help1.ps1 -example
+get-help .\help1.ps1 -online
+cls
+#
+#
+# now let's look at a comments in a function
+cat .\help2.ps1
+cls
+#
+# to use this, first dot source the function into our runspace
+. .\help2.ps1
+#
+# next run the function
+Get-cbh
+cls
+#
+#
+#  now get help
+Get-Help get-cbh -example
+Get-Help get-cbh -online
+cls
+#
+#  remember earlier we had a help failure
+#  First run the script
+.\badhelp
+#
+# Script works, what about help
+Get-Help .\badhelp.ps1
+#
+#  Hmm why
+cat .\badhelp.ps1
+#
+#
+#  END

@@ -1,0 +1,64 @@
+#
+#  Demo 4-1 - PowerShell Modules Couses
+#
+#
+#  Script blocks
+$SB = {get-childitem c:\}
+#
+#
+# Let's execute this script block
+& $SB
+CLS
+#
+# Let's create a script block with a parameter
+$SB2 = {param ($d) get-childitem $d}
+#
+# And execute it
+& $SB2 C:\Users
+cls
+#
+#  Using Script blocks and New-Module
+$SB3 = {Param ($b) Function X1 {"In x1, b = $b"} }
+$x = New-Module $SB3 -Argumentlist 42
+# So what is $X
+$x
+# now call function x1
+X1
+#
+# Now a richer example
+#
+#  Define a script block with TWO functions
+$Scr = {function do-hello {"hello world"};function hello-do {"World, hello"}} 
+# now create a dynamic module
+New-Module -Scriptblock $Scr 
+cls
+#
+# note what get-module says
+#
+Get-Module
+#
+# Let's next use these functions
+#
+do-hello
+hello-do
+cls
+#
+# Get the module propery imported
+#
+New-Module –Scriptblock $scr | Import-Module
+Get-Module
+#
+# Look at the dynamic module
+#
+Get-Module __dynamic*
+#
+#  And remove it
+#
+Get-Module __dynamic* | Remove-Module
+# 
+Get-Module
+#  END
+
+
+
+

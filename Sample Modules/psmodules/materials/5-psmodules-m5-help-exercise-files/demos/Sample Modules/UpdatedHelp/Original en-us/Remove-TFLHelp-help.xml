@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<helpItems xmlns="http://msh" schema="maml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:my="http://schemas.microsoft.com/office/infopath/2003/myXSD/2009-07-13T15:24:29" xmlns:xd="http://schemas.microsoft.com/office/infopath/2003" xml:lang="en-gb">
+<command:command>
+    <command:details>
+	<command:name>Remove-TFLHelp</command:name>
+		<maml:description>
+			<maml:para>Sample function to illustrate help (en)</maml:para>
+		</maml:description>
+		<maml:copyright>
+			<maml:para>(c) PSP 2012</maml:para>
+		</maml:copyright>
+		<command:verb>Remove</command:verb>
+		<command:noun>TFLHelp</command:noun>
+		<dev:version>1.0.0.0</dev:version>
+	</command:details>
+	<maml:description>
+		<maml:para>This section should give you a description of a cmdlet.</maml:para>
+	</maml:description>
+	<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Remove-TFLHelp</maml:name>
+				<command:parameter globbing="false" variableLength="" position="1" required="false" pipelineInput="false">
+					<maml:name>Extra</maml:name>
+					<maml:description>
+						<maml:para>This is an optional parameter, returned if specified.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="">String</command:parameterValue>
+					<dev:type>
+						<maml:name></maml:name>
+						<maml:uri></maml:uri>
+						<maml:description>
+							<maml:para></maml:para>
+						</maml:description>
+					</dev:type>
+					<dev:defaultValue></dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter globbing="false" variableLength="" position="1" required="false" pipelineInput="false">
+				<maml:name>Extra</maml:name>
+				<maml:description>
+					<maml:para>More stuff about Extra</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="">String</command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri></maml:uri>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri></maml:uri>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri></maml:uri>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para></maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>Simple example</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>Get-TFLHelp2</dev:code>
+				<dev:remarks>
+					<maml:para>Left as an exercise for the reader</maml:para>
+				</dev:remarks>
+				<command:commandLines>
+					<command:commandLine>
+						<command:commandText></command:commandText>
+					</command:commandLine>
+				</command:commandLines>
+			</command:example>
+		<command:example>
+	<maml:title>Complex example</maml:title>
+	<maml:introduction>
+    	<maml:para></maml:para>
+	</maml:introduction>
+	<dev:code>Get-TflHelp2 -Extra 42</dev:code>
+	<dev:remarks>
+		<maml:para>more stuff</maml:para>
+	</dev:remarks>
+	<command:commandLines>
+		<command:commandLine>
+			<command:commandText></command:commandText>
+		</command:commandLine>
+	</command:commandLines>
+	</command:example></command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>http://www.reskit.net/gettflhelp</maml:linkText>
+				<maml:uri>http://www.reskit.net/gettflhelp</maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+</helpItems>

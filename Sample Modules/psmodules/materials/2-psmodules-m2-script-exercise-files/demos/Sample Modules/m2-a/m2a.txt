@@ -1,0 +1,1 @@
+this module is the original M2 module used in the first demo in module 2 of the Creating PowerShell modules course.

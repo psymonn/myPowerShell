@@ -1,0 +1,24 @@
+cd 'E:\foo\Pluralsight modules demos'
+cat Say-Hello.cs
+#
+#
+# first, let's compile it
+Add-Type -Path .\Say-Hello.cs -OutputAssembly .\Sayhello.Dll
+#
+#
+# And import it
+# nb: the verb say, in the cmdleet, is NOT a good verb – use approved verbs!!
+Import-Module .\sayhello.dll
+cls
+Import-module .\sayhello.dll -verbose
+#
+#
+# now use it
+Say-Hello
+Say-Hello –P1 42
+#
+# manage it
+Get-Module Sayhello
+Remove-Module Sayhello
+get-module
+# end Demo 3-1

@@ -1,0 +1,65 @@
+#
+#  Demo 5-4 - Module Help and MAML
+#
+# Change to tflhelp module folder and see what's there
+cd $mod\tflhelp
+ls
+cls
+#
+# Look at a manifest
+cat .\TFLHelp.psd1
+cls
+#
+# And look at .psm1
+cat .\TFLHelp.psm1
+cls
+#
+#  Looka at the .ps1
+cat Get-TFLHelp.ps1
+cls
+#
+#
+# Now look at the help stuff
+#
+cd .\en-us
+ls
+cls
+# Look at the about_file
+Get-UICulture
+cat about_tflhelp.help.txt
+cls
+#
+# Look at MAML
+cat Get-TFLHelp-help.xml | more
+cls
+#
+#
+# now use all this
+Import-Module tflhelp -verbose
+# Use the functions
+get-command *tfl*
+Get-TflHelp
+Get-TflHelpDetails
+cls
+# now get help information
+# look at function help
+Get-Help Get-TFLHelp
+cls
+Get-Help Get-TFLHelp -Example
+# and online
+Get-Help Get-TFLHelp -online
+cls
+#  now get online details
+Get-Help Get-TflHelpDetails -online
+cls
+# and the about text
+Get-Help About_TFLhelp
+cls
+# now update
+# First look at the updates
+dir \\cookham1\c$\inetpub\wwwroot\TflHelp
+Update-Help tflhelp -force -verbose
+get-help about_tflhelp
+get-help get-tflhelp
+#
+#  END

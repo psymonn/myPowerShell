@@ -1,0 +1,36 @@
+#
+#  Demo 4-3 - Proxy Functions
+#
+#
+# Next create a new PS Session
+# Use a hash table to setup parameters to new-pssession
+$Office365 =  @{ ConfigurationName = "Microsoft.Exchange"}
+$Office365 += @{Connectionuri     = "Https://ps.outlook.com/powershell"}
+$Office365 += @{Credential        = $cred365}
+$Office365 += @{Authentication    = "Basic"}
+$Office365 += @{AllowRedirection  = $true}
+$s = New-PsSession @Office365
+#
+#  Note: you will see the session being redirected to your site
+#  Next Import the remote session
+CLS
+# Now let's import the sessions
+$results = Import-PSSession $s
+$results
+cls
+#
+# lets look at the imported modules
+Get-Module 
+#  How many cmdlets were returned as proxy functions?
+"{0} functions exported from Exchange ON-Line" -f $Results.ExportedFunctions.count
+#
+# let's look at a proxy function
+dir "function:get-mailbox"
+dir "function:get-mailbox" | format-list name, definition | more
+cls
+# And finally let' see this in action
+Get-mailbox | Get-MailboxStatistics | ft -a
+#  END
+
+
+

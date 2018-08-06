@@ -1,0 +1,34 @@
+#
+#  Demo 5-1 - Get-Help
+#
+#  First, look at Get-Help
+Get-Help -Name Get-Help | more
+cls
+#
+#  Now look at -Examples
+Get-Help -Name Get-Process -Example | more
+cls
+#
+#  Look at -Full
+#
+#
+Get-Help -Name Get-Service -Full | more
+cls
+#
+#  Now look at help in a window
+Get-Help -Name Get-ChildItem -ShowWindow
+cls
+#
+#
+#  Now get help online
+Get-Help -Name Get-History -Online
+#
+#
+cd demo:\m5demos
+get-help .\help1.ps1
+get-help .\help1.ps1 -online
+cls
+#
+# Bad Help in script - we'll see more later!
+get-help .\badhelp.ps1
+#  END

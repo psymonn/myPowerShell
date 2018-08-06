@@ -1,0 +1,12 @@
+#
+#  Demo 5-2 - Geting updated help
+Update-Help -Module Applocker -Verbose -Force
+cls
+#
+Save-Help -Module Applocker E:\SavedHelpInfo -Verbose -Force
+ls e:\SavedHelpInfo
+cls
+#
+#  now update that one cmdlet using saved information
+Update-Help -Sourcepath E:\savedhelpinfo -Module Applocker -Force -Verbose
+#  END

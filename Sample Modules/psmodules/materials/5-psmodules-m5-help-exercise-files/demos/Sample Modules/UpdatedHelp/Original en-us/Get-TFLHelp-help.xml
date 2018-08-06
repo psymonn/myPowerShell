@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<helpItems xmlns="http://msh" schema="maml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:my="http://schemas.microsoft.com/office/infopath/2003/myXSD/2009-07-13T15:24:29" xmlns:xd="http://schemas.microsoft.com/office/infopath/2003" xml:lang="en-gb">
+<command:command>
+    <command:details>
+	<command:name>Get-TFLHelp</command:name>
+		<maml:description>
+			<maml:para>Sample function to illustrate help (en)-original help file from original manifest/distribution.</maml:para>
+		</maml:description>
+		<maml:copyright>
+			<maml:para>(c) PSP 2012</maml:para>
+		</maml:copyright>
+		<command:verb>Get</command:verb>
+		<command:noun>TFLHelp</command:noun>
+		<dev:version>1.0.0.0</dev:version>
+	</command:details>
+	<maml:description>
+		<maml:para>This is a very simple module. It contains two functions, each in a separate 
+.ps1 file. The .psm1 file dot sources all of the ps1 files, and then exports 
+all the key objects.
+        </maml:para>
+        <maml:para>This is a second paragraph of the help file.</maml:para>
+	</maml:description>
+
+	<command:syntax>
+		<command:syntaxItem>
+			<maml:name>Get-TFLHelp</maml:name>
+			<command:parameter globbing="false" variableLength="" position="1" required="false" pipelineInput="false">
+					<maml:name>Extra</maml:name>
+					<maml:description>
+						<maml:para>This is an optional parameter. If you call the function with the extra
+                                   parameter, it's returned too. This demonstrates optional function parameters</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="">String</command:parameterValue>
+					<dev:type>
+						<maml:name></maml:name>
+						<maml:uri></maml:uri>
+						<maml:description>
+							<maml:para></maml:para>
+						</maml:description>
+					</dev:type>
+					<dev:defaultValue></dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter globbing="false" variableLength="" position="1" required="false" pipelineInput="false">
+				<maml:name>Extra</maml:name>
+				<maml:description>
+					<maml:para>This sectin contains details about the Extra parameter. If you 
+specify it, the cmdlet returns it.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="">String</command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri></maml:uri>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri></maml:uri>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri></maml:uri>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para></maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>Example 1</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>C:> Get-TFLHelp2</dev:code>
+				<dev:remarks>
+					<maml:para>The results are left as exercise for the reader
+</maml:para>
+				</dev:remarks>
+				<command:commandLines>
+					<command:commandLine>
+						<command:commandText></command:commandText>
+					</command:commandLine>
+				</command:commandLines>
+			</command:example>
+		<command:example>
+	<maml:title>Example 2</maml:title>
+	<maml:introduction>
+    	<maml:para>This example shows extra parameter
+
+    </maml:para>
+	</maml:introduction>
+	<dev:code>Get-TflHelp2 -Extra 42</dev:code>
+	<dev:remarks>
+		<maml:para>The results are also left as exercise for the reader.
+
+</maml:para>
+	</dev:remarks>
+	<command:commandLines>
+		<command:commandLine>
+			<command:commandText>Get-TflHelp2 -Extra 42</command:commandText>
+		</command:commandLine>
+	</command:commandLines>
+	</command:example></command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>Get it online at:</maml:linkText>
+				<maml:uri>http://go.microsoft.com/fwlink/?LinkID=113316</maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+</helpItems>
