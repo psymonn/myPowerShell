@@ -1,0 +1,83 @@
+These are detailed steps for setting up the Autolab project in order to easily set up a lab environment.
+
+1. Go to https://github.com/theJasonHelmick/PS-AutoLab-Env. You do NOT need to have a GitHub account.
+2. Read the README document in the repository. The instructions in this document are meant to supplement that file. If there are any discrepencies or conflicts with this document, follow the README file in the repository.
+3. Watch the video tutorial at https://www.youtube.com/watch?v=fIXHvbgxEDk&feature=youtu.be
+4. In the README file on Github, click the link to the latest release.
+5. On the release page, click on the Source zip file link and download the file.
+6. Extract the zip file. It will have a folder name similar to the zip file with a version number.
+7. Open up an elevated PowerShell window.
+  a) find the Windows PowerShell application in your Start menu
+  b) Right-click and select 'Runas administrator'
+8. Check your PowerShell execution policy: Get-ExecutionPolicy
+9. If it is set to Restricted, or if you get an error about failing to run a script, run this command: Set-ExecutionPolicy bypass -force
+10. You can set your execution policy back to the previous setting after building your lab environment. In a corporate environment your machine may be subject to a Group Policy setting controlling the execution policy.
+11. Change to the root of the extracted folder in your PowerShell session: cd c:\ps-autolab-env-<version.number>
+12. Run this command: .\setup-host.ps1
+    You should be able to accept all of the defaults. If you run into an error running this script, check your execution policy. You might also read the usage FAQ in the folder. You might need to reboot your computer to handle any pending updates before running this Setup-Host.
+13. Reboot as necessary.
+14. Open an elevated PowerShell window.
+15. Change to the Autolab folder which should be C:\Autolab if you accepted the defaults.
+16. Change to the configuration folder:
+    cd .\Configurations
+
+17. Create a folder called PowerShellLab:
+    mkdir PowerShellLab
+18. Go to https://github.com/jdhitsolutions/PowerShellLab and extract the current release zip file. There should be a link in the README file.
+19. Extract the CONTENTS of the PowerShellLab zip file to c:\AutoLab\Configurations\PowerShellLab. The directory should look something like this:
+
+PS C:\AutoLab\Configurations\PowerShellLab> dir
+
+
+    Directory: C:\AutoLab\Configurations\PowerShellLab
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        10/3/2017   9:09 AM                PostSetup
+-a----        10/3/2017   9:09 AM             24 .gitignore
+-a----        10/3/2017   9:09 AM           2083 AD-Group.json
+-a----        10/3/2017   9:09 AM            506 AD-OU.json
+-a----        10/3/2017   9:09 AM           5017 AD-Users.json
+-a----        10/3/2017   9:09 AM           1054 Instructions.md
+-a----        10/3/2017   9:09 AM           1856 README.md
+-a----        10/3/2017   9:09 AM          37377 VMConfiguration.ps1
+-a----        10/3/2017   9:09 AM           9004 VMConfigurationData.psd1
+-a----        10/3/2017   9:09 AM           7678 VMValidate.test.ps1
+
+
+20. Change location to the PowerShellLab folder in PowerShell.
+21. Look at the contents of Instructions.md: get-content .\Instructions.md
+22. To run the full lab setup unattended, run: unattend-lab
+    The first time you run this you may get prompted to install a nuget provider. The first time will also take quite a while to run as it will download evaluation ISO images from Microsoft.
+
+    Towards the end of the setup process, it will begin testing and validating the setup. You will see error messages until everything converges and finalizes. Again, do not be surprised if setting up the lab environment takes several hours.
+
+    If you see a warning about a pending reboot, restart your computer and try again starting at step 20 in an elevated PowerShell session.
+
+    If you get an error about a missing module like this:
+
+At C:\AutoLab\Configurations\PowerShellLab\VMConfiguration.ps1:26 char:5
++     Import-DSCresource -ModuleName PSDesiredStateConfiguration,
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Could not find the module '<xPSDesiredStateConfiguration, 6.4.0.0>'.
+
+    Install the module and required version:
+
+    PS C:\Autolab\Configurations\PowerShellLab> install-module xpsdesiredstateconfiguration -RequiredVersion 6.4.0.0
+
+    Then try running Unattend-Lab again.
+
+    If you run into a situation where validation never seems to finish, press Ctrl+C to abort. 
+    At the prompt run: Wipe-Lab
+    
+    Then try running the process one step at a time with these commands:
+    Setup-Lab
+    Run-Lab
+    Enable-Internet
+    wait about 20 minutes 
+    Run Get-VM to verify DOM1, SRV1, SRV2, SRV3 and Win10 are running. If any of the virtual machines have stopped run a command like: Start-VM Win10
+    Run Validate_Lab
+
+23. If you encounter other problems with Autolab, post an issue in the GitHub repository. This will require a Github account. Be sure to include any relevant error messages and information about your operating system, the contents of $PSVersiontable from PowerShell and the version of Autolab. You can copy and paste the results from running this PowerShell command: get-module psautolab,lability -list | Select Name,Version
+

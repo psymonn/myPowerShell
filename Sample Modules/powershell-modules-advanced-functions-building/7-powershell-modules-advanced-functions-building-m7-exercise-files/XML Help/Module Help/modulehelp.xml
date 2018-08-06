@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<helpItems xmlns="http://msh" schema="maml">
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<!-- Command-->
+		<command:details>
+			<command:name>New-VirtualMachine</command:name>
+			<maml:description>
+				<maml:para>This is New-VirtualMachine synopsis</maml:para>
+			</maml:description>
+			<maml:copyright>
+				<maml:para>
+				</maml:para>
+			</maml:copyright>
+			<command:verb>New</command:verb>
+			<command:noun>VirtualMachine</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+			<maml:para>This is New-VirtualMachine description</maml:para>
+		</maml:description>
+		<command:syntax>
+			<!-- Parameter Sets-->
+		</command:syntax>
+		<command:parameters>
+			<!-- All Parameters-->
+			<command:parameter required="true" globbing="false" pipelineInput="false" position="named" aliases="">
+				<maml:name>Name</maml:name>
+				<maml:description>
+					<maml:para>This is the name parameter description.</maml:para>
+				</maml:description>
+				<command:parameterValue required="true">string</command:parameterValue>
+				<dev:defaultValue>
+				</dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:examples>
+			<!-- Examples-->
+			<command:example>
+				<maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para>
+					</maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; New-VirtualMachine -Name MYVM</dev:code>
+				<dev:remarks>
+					<maml:para>This example creates a new VM called MYVM.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<!-- Command-->
+		<command:details>
+			<command:name>Get-VirtualMachine</command:name>
+			<maml:description>
+				<maml:para>This is Get-VirtualMachine synopsis</maml:para>
+			</maml:description>
+			<maml:copyright>
+				<maml:para>
+				</maml:para>
+			</maml:copyright>
+			<command:verb>Get</command:verb>
+			<command:noun>VirtualMachine</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+			<maml:para>This is Get-VirtualMachine description.</maml:para>
+		</maml:description>
+		<command:syntax>
+			<!-- Parameter Sets-->
+		</command:syntax>
+		<command:parameters>
+			<!-- All Parameters-->
+			<command:parameter required="true" globbing="false" pipelineInput="false" position="named" aliases="">
+				<maml:name>Name</maml:name>
+				<maml:description>
+					<maml:para>This is name description</maml:para>
+				</maml:description>
+				<command:parameterValue required="true">string</command:parameterValue>
+				<dev:defaultValue>
+				</dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:examples>
+			<!-- Examples-->
+			<command:example>
+				<maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para>
+					</maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt;Get--VirtualMachine -Name MYVM</dev:code>
+				<dev:remarks>
+					<maml:para>This example gets a VM called MYVM.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+</helpItems>

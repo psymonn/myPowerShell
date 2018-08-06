@@ -1,0 +1,31 @@
+PS C:\> Get-NetConnectionProfile | select NetworkCategory
+
+NetworkCategory
+---------------
+        Private
+
+
+PS C:\> winrm quickconfig
+WinRM service is already running on this machine.
+WinRM is already set up for remote management on this computer.
+PS C:\> Get-PackageSource -name psgallery
+PS C:\> Get-PackageSource -name psgallery -ProviderName
+PS C:\> Get-PackageSource -name psgallery
+
+Name                             ProviderName     IsTrusted  Location
+----                             ------------     ---------  --------
+PSGallery                        PowerShellGet    False      https://www.powershellgallery.com/api/v2/
+
+
+PS C:\> Set-PackageSource -Name PSGallery -Trusted
+
+Name                             ProviderName     IsTrusted  Location
+----                             ------------     ---------  --------
+PSGallery                        PowerShellGet    True       https://www.powershellgallery.com/api/v2/
+
+
+PS C:\> Find-Module xPSDesiredStateConfiguration -RequiredVersion '7.0.0.0' | Install-Module
+PS C:\> Find-Module InvokeDSC -RequiredVersion '2.0.78' | Install-Module
+PS C:\> cd D:\scripts
+PS D:\scripts> Import-Module InvokeDSC
+PS D:\scripts>

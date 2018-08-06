@@ -1,0 +1,2 @@
+﻿$env:COMPUTERNAME
+dir

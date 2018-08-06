@@ -1,0 +1,12 @@
+
+Setting up an Active Directory PKI
+http://blogs.technet.com/b/askds/archive/2009/09/01/designing-and-implementing-a-pki-part-i-design-and-planning.aspx
+
+Deploying an AD CS Two-Tier PKI Hierarchy
+https://technet.microsoft.com/en-us/library/hh831348.aspx
+
+Active Directory Certificate Services and Public Key Management
+https://technet.microsoft.com/en-us/library/cc753828.aspx
+
+Configure Certificate Auto Enrollment
+https://technet.microsoft.com/en-us/library/cc731522.aspx

@@ -1,0 +1,65 @@
+Disk History Report 10/07/2018
+******************************
+Data Source = D:\Studying\PLURALSIGHT Courses\automation-powershell-scripts\05\demos\demos\DiskHistory.csv
+
+*************
+Latest Check
+*************
+
+Computername    DeviceID SizeGB           FreeGB          PctFree Date                 
+------------    -------- ------           ------          ------- ----                 
+DESKTOP-N5523PQ C:          222  7.9317512512207 3.56907940021176 8/07/2018 7:29:35 PM 
+DESKTOP-N5523PQ D:          932 255.689224243164 27.4488756500877 8/07/2018 7:29:35 PM 
+DESKTOP-N5523PQ E:          222 10.4953842163086 4.72098538508356 8/07/2018 7:29:35 PM 
+DOM1            C:          128 91.4932548245415 71.4791053316731 1/12/2018 10:50:36 AM
+SERVER01        C:          500  182.12841701787 36.4256834035739 1/12/2018 10:50:36 AM
+SERVER02        C:          237 89.9794236961752 37.9660015595676 1/12/2018 10:50:36 AM
+SERVER02        D:          476 389.316239373758 81.7891259188568 1/12/2018 10:50:36 AM
+SERVER03        C:          450 320.548620054498 71.2330266787774 1/12/2018 10:50:36 AM
+SERVER04        C:          450 141.611214143224 31.4691586984942 1/12/2018 10:50:36 AM
+SRV1            C:          128 22.1892618825659 17.3353608457546 1/12/2018 10:50:36 AM
+SRV2            C:          128 55.9873252455145 43.7400978480582 1/12/2018 10:50:36 AM
+
+
+*******************
+Low Diskpace <=30%
+*******************
+
+Computername    DeviceID SizeGB           FreeGB          PctFree Date                 
+------------    -------- ------           ------          ------- ----                 
+DESKTOP-N5523PQ C:          222  7.9317512512207 3.56907940021176 8/07/2018 7:29:35 PM 
+DESKTOP-N5523PQ D:          932 255.689224243164 27.4488756500877 8/07/2018 7:29:35 PM 
+DESKTOP-N5523PQ E:          222 10.4953842163086 4.72098538508356 8/07/2018 7:29:35 PM 
+SRV1            C:          128 22.1892618825659 17.3353608457546 1/12/2018 10:50:36 AM
+
+
+**************************************
+Change Percent between last 2 reports
+**************************************
+SERVER01 Drive C: had a change of -29%
+SERVER02 Drive C: had a change of -3%
+SERVER02 Drive D: had a change of 1%
+SERVER03 Drive C: had a change of -3%
+SERVER04 Drive C: had a change of 9%
+DOM1 Drive C: had a change of -5%
+SRV1 Drive C: had a change of -4%
+SRV2 Drive C: had a change of 8%
+DESKTOP-N5523PQ Drive C: had a change of 0%
+DESKTOP-N5523PQ Drive D: had a change of 0%
+DESKTOP-N5523PQ Drive E: had a change of 0%
+
+
+*******************************
+Percent Free Average Over Time
+*******************************
+SERVER01 C: = 52%
+SERVER02 C: = 33%
+SERVER02 D: = 74%
+SERVER03 C: = 73%
+SERVER04 C: = 28%
+DOM1 C: = 74%
+SRV1 C: = 26%
+SRV2 C: = 47%
+DESKTOP-N5523PQ C: = 4%
+DESKTOP-N5523PQ D: = 27%
+DESKTOP-N5523PQ E: = 5%

@@ -1,0 +1,79 @@
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $U= [USER]::NEW()
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $U
+
+
+Name        :
+Mailbox     : 0
+CN          :
+Description :
+DisplayName :
+
+
+
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $U|GM
+
+
+   TypeName: User
+
+Name        MemberType Definition
+----        ---------- ----------
+AddUser     Method     void AddUser(string Name, int Mailbox)
+Describe    Method     void Describe(string Description)
+Equals      Method     bool Equals(System.Object obj)
+GetHashCode Method     int GetHashCode()
+GetType     Method     type GetType()
+ToString    Method     string ToString()
+CN          Property   string CN {get;set;}
+Description Property   string Description {get;set;}
+DisplayName Property   string DisplayName {get;set;}
+Mailbox     Property   int Mailbox {get;set;}
+Name        Property   string Name {get;set;}
+
+
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $u.adduer("Joe",16)
+Method invocation failed because [User] does not contain a method named 'adduer'.
+At line:1 char:1
++ $u.adduer("Joe",16)
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : MethodNotFound
+
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $u.adduser("Joe",16)
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $u
+
+
+Name        : Joe
+Mailbox     : 16
+CN          :
+Description : User created on 07/08/2018 12:35:29
+DisplayName :
+
+
+
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $laptop = [Computer]::new()
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $laptop
+
+
+OperatingSystem :
+Name            :
+Mailbox         : 0
+CN              :
+Description     :
+DisplayName     :
+
+
+
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $laptop.AddUser("Laptop", 15063)
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos> $laptop
+
+
+OperatingSystem : 15063
+Name            : Laptop
+Mailbox         : 0
+CN              :
+Description     : Computer created on 07/08/2018 12:39:00
+DisplayName     :
+
+
+
+PS D:\Studying\PLURALSIGHT Courses\powershell-v5-new\02\demos>
