@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>BasicCmdlet.SnowReport</Name>
+      <ViewSelectedBy>
+        <TypeName>BasicCmdlet.SnowReport</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>Country</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Resort</Label>
+                <ScriptBlock>
+                  if($_.IsOpen) { $_.Resort + " (open)"; } else { $_.Resort + " (closed)"; }
+                </ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Current snow depth</Label>
+                <PropertyName>SnowDepth</PropertyName>
+                <formatString>{0} cm</formatString>
+              </ListItem>
+              <ListItem>
+                <Label>Expected Snow</Label>
+                <ScriptBlock>
+                  if($_.ExpectedSnow -eq 0) { "no snow expected"; } else { [String]::Format("{0} cm", $_.ExpectedSnow); }
+                </ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+    
+    <View>
+      <Name>BasicCmdlet.SnowReport</Name>
+      <ViewSelectedBy>
+        <TypeName>BasicCmdlet.SnowReport</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>30</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Status</Label>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Snow depth</Label>
+            <Width>10</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Country</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Resort</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if($_.IsOpen) { "open"; } else { "closed"; }
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SnowDepth</PropertyName>
+                <formatString>{0} cm</formatString>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+
+    <View>
+      <Name>BasicCmdlet.SnowReport</Name>
+      <ViewSelectedBy>
+        <TypeName>BasicCmdlet.SnowReport</TypeName>
+      </ViewSelectedBy>
+      <WideControl>
+        <WideEntries>
+          <WideEntry>
+              <WideItem>
+                <ScriptBlock>
+                  $openText = "closed";
+                  if($_.IsOpen) { $openText = "open"; }
+                  [String]::Format("{0} in {1} is {2} with {3} cm of snow", $_.Resort, $_.Country, $openText, $_.ExpectedSnow);
+                </ScriptBlock>
+              </WideItem>
+          </WideEntry>
+        </WideEntries>
+      </WideControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>
+
+
