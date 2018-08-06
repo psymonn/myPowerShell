@@ -41,6 +41,8 @@ Function Import-VdiskToPVS {
                 Import-PSSession -Session $pvs -Module Citrix.PVS.SnapIn
             }
 
+            #$ErrorActionPreference = "stop"
+            $error.Clear()
             #From PVS server
             #Choose a store e.g Staging (vDisk versioning can be view here)
             $wrkPVSStore=(Get-PvsStoreSharedOrServerPath -ServerName $ComputerName -SiteName $siteName|Where-Object{$_.StoreName -eq $PVSStore})
@@ -48,7 +50,20 @@ Function Import-VdiskToPVS {
 
             #Create meta data for the new vDisk
             $newPvsLocator = New-PvsDiskLocator -Name $vdiskFile -StoreName Automation -ServerName $ComputerName -SiteName chicago -VHDX -errorAction stop
+             
+            
+             $error.Count
+             $targetNameInfo = $error[0].CategoryInfo | select TargetName
+             $error[0].FullyQualifiedErrorId
+             $error[0].Exception
+              $pvsError = @{ 'CategoryInfo' = "$error[0].CategoryInfo";
+                            'Exception' = "$error[0].Exception";
+                            'FullyQualifiedErrorId' = "$error[0].FullyQualifiedErrorId"
+                          }
+             if ($error[0]){
+                  Write-Error -Message "Could not find path: $path" -Exception ([Exception]::new($pvsError)) -ErrorAction Stop
 
+             }
             #Add or Import Existing vDisk; search for vDisk; choose the vDisk and Select Add
             #You must bein VHDX otherwise PVP file will not be created.
             $importPVSDisk = Import-PvsDisk -DiskLocatorName $newPvsLocator.Name -StoreName $store -SiteName $siteName -ServerName $ComputerName -Enabled -VHDX -errorAction stop
@@ -64,10 +79,33 @@ Function Import-VdiskToPVS {
              Write-Warning ("Failed at vDisk Captured  : $getExceptionType $($_.Exception.message)")
              $_.GetType().FullName
              $_.Exception
+             $_.Exception.keys
              $_.InnerException
+
+             
+                Write-Output "General excpetion Could not find $path"
+                write-host "Caught an exception:" -ForegroundColor Red
+                write-host "Exception Type: $($_.Exception.GetType().FullName)" -ForegroundColor Red
+                write-host "Exception Message: $($_.Exception.Message)" -ForegroundColor Red
+                Write-host $PSItem.ToString()
+                Write-Output $PSItem.Exception.FileName
+                Show-ExceptionType -Exception $_.Exception
+
+
+                [hashtable]$ageList = $_.Exception
+                #$hash.Keys | % { "key = $_ , value = " + $hash.Item($_) }
+
+                foreach($key in $ageList.keys)
+                {
+                    $message = '{0} is {1} years old' -f $key, $ageList[$key]
+                    Write-Output $message
+                }
+
+
 
           }finally{
             Remove-PSSession -ID $pvs.ID
+            #$ErrorActionPreference = "Continue"
             #Get-PSSession | Remove-PSSession
           }
     }else{
