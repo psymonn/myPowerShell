@@ -1,0 +1,22 @@
+{ "ConfigurationItems": [
+	{ "VirtualMachine": [
+        { "Name": "TESTDC" }
+	]},
+	{ "OperatingSystem": [
+
+	]},
+	{ "ActiveDirectory": [
+		{ "Users": [
+
+		]},
+		{ "Groups": [
+
+		]},
+		{ "OrganizationalUnits": [
+			
+		]}
+	]},
+	{ "CSVFile": [
+
+	]}
+]}

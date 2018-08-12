@@ -1,0 +1,22 @@
+{ "ConfigurationItems": [
+	{ "VirtualMachine": [
+
+	]},
+	{ "OperatingSystem": [
+
+	]},
+	{ "ActiveDirectory": [
+		{ "Users": [
+
+		]},
+		{ "Groups": [
+
+		]},
+		{ "OrganizationalUnits": [
+			
+		]}
+	]},
+	{ "CSVFile": [
+
+	]}
+]}
