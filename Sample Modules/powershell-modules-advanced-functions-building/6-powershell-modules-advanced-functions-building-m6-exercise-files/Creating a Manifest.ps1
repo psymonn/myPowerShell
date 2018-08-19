@@ -1,5 +1,6 @@
 ﻿#region Notice the ModuleType is a Script module with little to no information
-$module = Get-Module -ListAvailable -Name MyModule
+$module = Get-Module -ListAvailable -Name Mytools
+#$module.PrivateData
 $module | Select *
 #endregion
 
@@ -20,18 +21,18 @@ $modulePath
 
 #region Create a basic manifest --my minimum recommendations
 $params = @{
-	'Author' = 'Adam Bertram'
+	'Author' = 'Psymon Ng'
 	'CompanyName' = 'Adam the Automator, LLC.'
 	'Description' = 'This is a module that does this and that. It was designed to solve some problem.'
-    'NestedModules' = 'MyModule' ## This is required to expose functions in a manifest module
-	'Path' = "$modulePath\MyModule.psd1" ## Use the same name as the module with a PSD1 extension
+    'NestedModules' = 'MyTools' ## This is required to expose functions in a manifest module
+	'Path' = "$modulePath\MyTools.psd1" ## Use the same name as the module with a PSD1 extension
 }
 
 New-ModuleManifest @params
 #endregion
 
 #region Verifying manifest behavior
-Get-Module -ListAvailable -Name MyModule | select *
+Get-Module -ListAvailable -Name Mytools | select *
 #endregion
 
 #region Review the manifest and add an optional attribute
@@ -40,9 +41,9 @@ ise "$modulePath\MyModule.psd1"
 PrivateData = @{
 	PSData = @{
 		Tags = 'Pluralsight','ModuleTraining' ## For the PowerShell Gallery
-		ProjectUri = 'https://github.com/adbertram/PluralsightModuleTraining'
+		ProjectUri = 'https://github.com/psymonn/myPowerShell'
 	}
 }
 
-(Get-Module -Name MyModule -ListAvailable).PrivateData['PSData']
+(Get-Module -Name MyTools -ListAvailable).PrivateData['PSData']
 #endregion

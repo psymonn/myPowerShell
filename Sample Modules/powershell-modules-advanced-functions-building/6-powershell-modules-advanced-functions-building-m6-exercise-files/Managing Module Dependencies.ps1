@@ -1,5 +1,5 @@
 ﻿## Use an existing manifest and build upon it
-$module = Get-Module -ListAvailable -Name MyModule
+$module = Get-Module -ListAvailable -Name MyTools
 ise $module.Path
 
 ## No FileList entries and only itself as NestedModules
@@ -19,10 +19,10 @@ ise "$($module.ModuleBase)\NestedModule2.psm1"
 ise $module.Path
 
 ## Nested modules are now associated with MyModule
-Import-Module MyModule -Force -PassThru | select nestedmodules,filelist
+Import-Module MyTools -Force -PassThru | select nestedmodules,filelist
 
 ## Functions in all modules show up as one
-Get-Command -Module MyModule
+Get-Command -Module MyTools
 
 #endregion
 
@@ -31,7 +31,7 @@ Get-Command -Module MyModule
 ## Add a TXT file to the manifest
 New-Item -Path "$($module.ModuleBase)\mytextfile.txt"
 ise $module.Path
-$module = Import-Module MyModule -Force -PassThru
+$module = Import-Module MyTools -Force -PassThru
 $module.FileList # currently just for inventorying
 
 ## Will show how to ensure these files exist when loading module later

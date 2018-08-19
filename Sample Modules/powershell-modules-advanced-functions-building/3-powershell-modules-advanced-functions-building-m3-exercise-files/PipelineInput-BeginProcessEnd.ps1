@@ -21,6 +21,8 @@ function Set-VirtualMachine
 		[Parameter(Mandatory, ValueFromPipeline)]
 		[pscustomobject]$InputObject
 	)
+    #$input        
+    
     begin {
         
     }
@@ -63,12 +65,14 @@ function Set-VirtualMachine
 		#New-Item -Path C:\VMNames.txt -Type File
 		
 		#Write-Verbose -Message 'Beginning to process pipeline objects with Get-VirtualMachine'
+        #$input
         
 	}
 	process
 	{
 		#Write-Verbose -Message "Processing pipeline object representing VM [$($InputObject.Name)]..."
 		#Add-VmToFile -Name $InputObject.Name
+        #$input
         
         
 	}

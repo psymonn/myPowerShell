@@ -1,4 +1,4 @@
-﻿$module = Get-Module -ListAvailable -Name MyModule
+﻿$module = Get-Module -ListAvailable -Name MyTools
 ise $module.Path
 
 #region Use the FileList attribute to check for files before loading module
@@ -17,6 +17,6 @@ $requiredFiles | foreach {
 }
 #>
 
-Import-Module MyModule
+Import-Module MyTools -Force
 
 #endregion
