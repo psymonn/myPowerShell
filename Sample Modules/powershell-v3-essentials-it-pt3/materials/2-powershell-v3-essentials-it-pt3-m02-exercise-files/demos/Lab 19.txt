@@ -1,0 +1,34 @@
+#1. Get all instances of the Win32_Volume class on your computer.
+
+Get-WmiObject win32_volume
+
+#2. Repeat step 1 but only fixed volumes and select its name, size, freespace and the filesystem. If you want, format the sizes in MB.
+
+Get-WmiObject win32_volume -filter "drivetype=3" | 
+Select Name,Capacity,FreeSpace,FileSystem
+
+or formatted
+
+Get-WmiObject win32_volume -filter "drivetype=3" | 
+Select Name,@{N="SizeMB";E={$_.Capacity/1MB -as [int]}},
+@{N="FreeMB";E={[math]::Round($_.FreeSpace/1MB,2)}},FileSystem
+
+#3. Get the Win32_OperatingSystem class and display the computername, the name of the operating system, when it was installed (in a friendly format), when it last booted (in a friendly format), a calculated property for the uptime and a property that indicates if it is 64 bit or not.
+
+Get-WmiObject win32_operatingsystem | 
+Select PSComputername,
+@{N="OS";E={$_.Caption}},
+@{N="Installed";E={$_.ConvertToDateTime($_.InstallDate)}},
+@{N="LastBoot";E={$_.ConvertToDateTime($_.LastBootUpTime)}},
+@{N="Uptime";E={(Get-Date) - $_.ConvertToDateTime($_.LastBootUpTime)}},
+OSArchitecture
+
+#4. If you have remote computers you can query, repeat the previous steps using alternate credentials where possible. Include the computername in your output.
+
+Get-WmiObject win32_operatingsystem -computername $Computers -credential globomantics\administrator | 
+Select PSComputername,
+@{N="OS";E={$_.Caption}},
+@{N="Installed";E={$_.ConvertToDateTime($_.InstallDate)}},
+@{N="LastBoot";E={$_.ConvertToDateTime($_.LastBootUpTime)}},
+@{N="Uptime";E={(Get-Date) - $_.ConvertToDateTime($_.LastBootUpTime)}},
+OSArchitecture

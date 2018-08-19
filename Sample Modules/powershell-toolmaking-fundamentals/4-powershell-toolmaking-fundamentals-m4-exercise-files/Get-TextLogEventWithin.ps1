@@ -32,3 +32,5 @@ $WhereFilter = {($_.LastWriteTime -ge $StartTimestamp) -and ($_.LastWriteTime -l
 
 ## Find all interesting log files
 Get-ChildItem @GciParams | Where-Object $WhereFilter
+
+#.\Get-TextLogEventWithin.ps1 -StartTimestamp '08-18-18 04:00' -EndTimestamp '08-18-18 11:00'

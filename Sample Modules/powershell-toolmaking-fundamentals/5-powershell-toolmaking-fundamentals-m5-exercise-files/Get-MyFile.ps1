@@ -27,3 +27,7 @@ foreach ($Computer in $Computername) {
 		}
 	}
 }
+
+#.\Get-MyFile.ps1 -Criteria Extension -Attributes @{'Extension' = 'log'}
+#.\Get-MyFile.ps1 -Criteria Age -Attributes @{'DaysOld' = 5}
+#.\Get-MyFile.ps1 -Criteria Name -Attributes @{'Name' = 'Jenkins'}

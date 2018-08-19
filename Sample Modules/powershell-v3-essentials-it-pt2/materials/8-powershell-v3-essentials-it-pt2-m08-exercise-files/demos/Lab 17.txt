@@ -1,0 +1,27 @@
+﻿1. Create a scheduled job on your computer to run Update-Help on a weekly basis.
+
+$trigger = New-JobTrigger -Weekly -DaysOfWeek Sunday -At "11:00 PM"
+$option = New-ScheduledJobOption -RunElevated -RequireNetwork
+Register-ScheduledJob -Name "Weekly Help Update" -ScriptBlock {Update-Help -force} -Trigger $trigger -ScheduledJobOption $option
+
+Get-ScheduledJob
+
+2. Manually start the job.
+
+start-job -definitionname "Weekly Help Update"
+
+3. Get the job results.
+
+receive-job "weekly help update" -keep
+
+4. Disable the job.
+
+Disable-ScheduledJob "weekly help update" -PassThru
+
+5. Remove the scheduled job.
+
+#test the removal
+remove-Job "weekly help update" -WhatIf
+
+#remove it for real
+remove-Job "weekly help update"

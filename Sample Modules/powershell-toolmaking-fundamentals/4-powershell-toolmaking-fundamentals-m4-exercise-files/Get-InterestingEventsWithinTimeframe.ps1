@@ -26,7 +26,7 @@ param (
     [string]$LogFileExtension = 'log'
 )
 begin {
-    . C:\LogInvestigator.ps1
+    . ./LogInvestigator.ps1
 }
 process {
 	try {
@@ -41,3 +41,5 @@ process {
 		Write-Error "$($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 	}
 }
+
+#.\Get-InterestingEventsWithinTimeframe.ps1 -computername localhost -StartTimestamp '08-18-18 04:00' -EndTimestamp '08-18-18 11:00'

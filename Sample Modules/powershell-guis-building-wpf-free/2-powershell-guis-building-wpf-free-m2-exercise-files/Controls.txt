@@ -1,0 +1,34 @@
+
+Button
+        Button Name=Button1 Content=Click Here HorizontalAlignment=Left Height=39 Margin=65,201,0,0 VerticalAlignment=Top Width=128 ClickMode=Press Opacity=0.5
+        Button
+            Button.Effect
+                DropShadowEffect
+            Button.Effect  
+        Button
+
+Label
+   Label Name=Label1 Content=Hello World! HorizontalAlignment=Left Height=27 
+Margin=23,10,0,0 VerticalAlignment=Top Width=152 FontWeight=Bold FontSize=14
+
+TextBox
+        TextBox Name=TextBox1 HorizontalAlignment=Left Height=165 Margin=10,144,0,0 TextWrapping=Wrap Text=Enter your text here VerticalAlignment=Top Width=497 FontWeight=Bold SpellCheck.IsEnabled=True MaxLines=12 MaxLength=200
+
+ListBox
+        ListBox Name=ListBox1 HorizontalAlignment=Left Height=24 Margin=175,42,0,0 VerticalAlignment=Top Width=175
+            ListBoxItem Content=First 
+            ListBoxItem Content=Second
+            ListBoxItem Content=Third
+   ListBox Name=ListBox1 HorizontalAlignment=Left Height=24 Margin=175,42,0,0 VerticalAlignment=Top Width=175
+   ListBox
+
+Image
+    Image Name=Image1 HorizontalAlignment=Left Height=223 Margin=127,56,0,0 VerticalAlignment=Top Width=250 Source=CUsersJAdkinPicturesPowerShell.png Stretch=Fill 
+    Image
+
+            Image.Effect
+                BlurEffect
+            Image.Effect
+
+TextBlock
+    TextBlock HorizontalAlignment=Left Height=111 Margin=46,35,0,0 TextWrapping=Wrap VerticalAlignment=Top Width=117 Text=Lets add in some useful Information

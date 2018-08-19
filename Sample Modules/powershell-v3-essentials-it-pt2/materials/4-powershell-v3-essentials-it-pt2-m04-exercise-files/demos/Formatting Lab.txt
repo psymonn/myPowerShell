@@ -1,0 +1,17 @@
+﻿#demo formatting
+
+1. Display all .exe files under C:\Windows using a wide, 4 column display.
+
+dir c:\windows\*.exe | format-wide -column 4
+
+2. Get the 50 latest System event logs and display as a list, grouped by
+the source and displaying the TimeGenerated,EntryType and Message.
+
+get-eventlog system -newest 50 | sort Source,TimeGenerated | 
+fl -group Source -property TimeGenerated,EntryType,Message
+
+3. Repeat the previous command but display as table with same groupings and
+properties. Wrap text and make it pretty.
+
+get-eventlog system -newest 50 | sort Source,TimeGenerated | 
+ft -group Source -property TimeGenerated,EntryType,Message -wrap -auto

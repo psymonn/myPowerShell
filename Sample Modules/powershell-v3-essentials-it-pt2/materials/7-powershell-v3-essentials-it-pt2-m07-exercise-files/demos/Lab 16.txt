@@ -1,0 +1,19 @@
+1. Create a local background job to find the latest 100 errors in the system event log. 
+Then retrieve the results.
+
+start-job {get-eventlog system -newest 100 -EntryType Error} -Name SystemErrors
+receive-job SystemErrors -keep
+
+Or receive job by its ID
+
+2. Run a remote command to get the size of the $env:temp folder on one or more 
+remote computers, or specify your computer name and localhost. But do this as a 
+local background job. Retrieve the results.
+
+$j = invoke-command {dir $env:temp -recurse -file | measure length -sum} -computer 127.0.0.1,localhost -asjob
+
+receive-job $j -keep
+
+or receive job by its ID
+
+

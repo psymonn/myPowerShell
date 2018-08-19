@@ -24,3 +24,8 @@ process {
 		Write-Error  "$($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 	}
 }
+
+#.\Get-MyAcl.ps1 .\testAcl.txt 
+#.\Remove-MyAcl.ps1 .\testAcl.txt -Identity 'TI'
+#.\Get-MyAcl.ps1 .\testAcl.txt 
+#Get-ChildItem -Path .\ |foreach {.\Remove-MyAcl.ps1 -Path $_.FullName -Identity 'TI'}

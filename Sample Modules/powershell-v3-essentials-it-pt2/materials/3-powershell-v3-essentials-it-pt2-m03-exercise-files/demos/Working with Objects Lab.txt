@@ -1,0 +1,19 @@
+﻿#Working with objects lab
+
+1. What type of objects do you get when you run: Get-Eventlog -list 
+
+Run:
+Get-eventlog -list | Get-Member
+System.Diagnostics.EventLog objects
+
+2. What do you think is the actual property name for the Max(K) column?
+
+MaximumKilobytes
+
+3. Using Get-Eventlog display the 100 most recent events in the System event log,
+but only show the TimeGenerated, a property that shows how old the event is, its
+source, entry type and a property that uses Computername instead of Machinename.
+
+Get-EventLog system -newest 100 | 
+Select TimeGenerated,@{Name="EventAge";Expression={(Get-Date) - $_.TimeGenerated}},
+Source,EntryType,@{Name="Computername";Expression={$_.Machinename}}

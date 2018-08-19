@@ -18,3 +18,6 @@ process {
 		Write-Error "$($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 	}
 }
+
+#(get-acl -Path .\Get-MyAcl.ps1).access
+#.\Get-MyAcl.ps1 Get-MyAcl.ps1

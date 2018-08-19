@@ -30,3 +30,6 @@ foreach ($File in $AfterArchivedFiles) {
     Set-MyAcl -Path $File.FullName -Identity $FullPermissionGroup -Right 'FullControl' -InheritanceFlags None -PropagationFlags None -Type Allow
 }
 Write-Verbose 'Done'
+
+#.\ToolSetExample.ps1 -Age 4 -Verbose
+

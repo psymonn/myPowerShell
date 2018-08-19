@@ -1,0 +1,22 @@
+﻿#Serialization Lab
+
+1. Export all running services to a CSV file, capturing the service name, 
+display name, status, and whether the service can be stopped using the 
+colon (:) as the delimiter.
+
+get-service | where {$_.status -eq 'running'} | 
+Select DisplayName,ServiceName,Status,CanStop | 
+Export-csv running.csv -Delimiter ":"
+
+2. Import the csv file and display the objects sorted by display name 
+
+import-csv running.csv -Delimiter ":" | sort Displayname
+
+3. Export the newest 100 errors from the system eventlog to a PowerShell 
+xml file.
+
+get-eventlog system -Newest 100 | Export-Clixml sysevents.xml
+
+4. Import the xml file and group the results by the event source
+
+Import-Clixml sysevents.xml | Group Source

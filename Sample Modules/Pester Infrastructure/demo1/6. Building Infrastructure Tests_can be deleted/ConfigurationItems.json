@@ -1,0 +1,36 @@
+{
+	"ConfigurationItems": [
+		{ "VirtualMachine": [
+            { "Name": "TESTDC"},
+            { "Memory": "4GB"},
+            { "Generation": "1" },
+            { "SwitchName": "LabSwitch" },
+            { "Path": "C:\\VMs" },
+            { "VHD": [
+                { "Path": "C:\\VHDs\\TESTDC.vhdx" },
+                { "Dynamic": "True" },
+                { "AttachedToVmName": "TESTDC" },
+                { "Size": "40GB" }
+            ]
+		}]
+	}, 
+	{ "OperatingSystem": [
+
+	]}, 
+	{ "ActiveDirectory": [
+		{ "Users": [
+
+		]}, 
+		{ "Groups": [
+
+		]}, 
+		{ "OrganizationalUnits": [
+
+		]
+	}]
+	}, 
+	{ "CSVFile": [
+
+	]
+	}]
+}

@@ -1,0 +1,16 @@
+﻿1. Create a regular expression pattern for a phone number and test it with a variety of numbers, good and bad.
+
+$phone = "^\d{3}-\d{4}$"
+
+"555-1234","5-1234","555-2222","123-45667","444-4455" | where {$_ -match $phone}
+
+2. Create a text file of phone numbers and use Select-String to find all numbers that match.
+
+get-content phonenumbers.txt | select-string $phone -Allmatch
+
+3. Repeat #2 but find all numbers that do not match.
+
+Did you read the help for Select-String?
+
+get-content phonenumbers.txt | select-string $phone -Allmatch -NotMatch
+

@@ -1,0 +1,24 @@
+﻿#Core PowerShell Cmdlets Lab
+
+1. List all .txt files under C:\Windows and all subfolders
+
+dir c:\windows -Include *.txt -recurse | MEASURE
+or
+dir c:\windows -filter *.txt -recurse
+
+2. Repeat and measure how many txt files and their total size
+
+dir c:\windows -filter *.txt -recurse | measure -Property length -sum
+
+3. Get all processes that have a company name property, group them 
+by company name and sort the count in descending order
+
+get-process | where Company | group company | sort count -Descending
+or
+get-process | where {$_.Company} | group company | sort count -Descending
+
+4. Get processes that have a StartTime property, sort on it then select
+the ID, Name, WorkingSet and StartTime properties, but only display the first
+10 processes.
+
+get-process | where Starttime | sort starttime | select ID,Name,WorkingSet,Starttime -first 10

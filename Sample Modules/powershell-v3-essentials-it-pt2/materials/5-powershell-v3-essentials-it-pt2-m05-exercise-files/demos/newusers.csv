@@ -1,0 +1,6 @@
+﻿OU,name,samaccountname,UserPrincipalname,Displayname,GivenName,sn,Password,UserAccountControl,Description,Title,Department
+"OU=Employees,DC=globomantics,dc=local",Archie Admin,aadmin,aadmin@globomantics.local,Archie Admin,Archie,Admin,P@ssword,544,,,Admin
+"OU=Research,OU=Employees,DC=globomantics,dc=local",Enrico Fermi,efermi,efermi@globomantics.local,Enrico Fermi,Enrico,Fermi,P@ssword,544,,Physicist,Research
+"OU=Research,OU=Employees,DC=globomantics,dc=local",Nick Telsa,ntesla,ntesla@globomantics.local,Nick Telsa,Nicholas,Tesla,P@ssword,544,,Scientist,Research
+"OU=Research,OU=Employees,DC=globomantics,dc=local",Richard Feynman,rfeynman,rfeynman@globomantics.local,Richard Feynman,Richard,Feynmand,P@ssword,544,,Principal ,Research
+

@@ -1,0 +1,26 @@
+#1. Get all instances of the Win32_Volume class on your computer for fixed volumes and select its name, size, freespace and the filesystem. Format the sizes in MB.
+
+$mysessions = new-cimsession -comp chi-dc01,chi-dc04,chi-fp02
+
+$mysessions | Get-Ciminstance win32_volume -filter "drivetype=3" | 
+Select PSComputername,Name,@{N="SizeMB";E={$_.Capacity/1MB -as [int]}},
+@{N="FreeMB";E={[math]::Round($_.FreeSpace/1MB,2)}},FileSystem
+
+#2. Get the Win32_OperatingSystem class and display the computer name, the name of the operating system, when it was installed, last booted, a calculated property for the uptime and a property that indicates if it is 64 bit or not.
+
+Get-CimInstance win32_operatingsystem -computername $env:computername,chi-dc01 | 
+Select PSComputername,
+@{N="OS";E={$_.Caption}},
+InstallDate,LastBootUpTime,
+@{N="Uptime";E={(Get-Date) - $_.LastBootUpTime}},
+OSArchitecture
+
+
+#3. Use CIMSessions to remote computers if you can.
+
+$mysessions | Get-CimInstance win32_operatingsystem | 
+Select PSComputername,
+@{N="OS";E={$_.Caption}},
+InstallDate,LastBootUpTime,
+@{N="Uptime";E={(Get-Date) - $_.LastBootUpTime}},
+OSArchitecture

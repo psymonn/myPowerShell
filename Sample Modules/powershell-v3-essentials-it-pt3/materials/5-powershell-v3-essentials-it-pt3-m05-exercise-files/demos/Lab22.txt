@@ -1,0 +1,10 @@
+﻿#requires -version 3.0
+
+1. Set-ExecutionPolicy RemoteSigned
+
+
+2. Sample Profile script
+
+set-alias -name np -value Notepad
+$sig = "Jeffery Hicks MVP,MCT,MCSE.MCSA"
+New-PSDrive -name Docs -psprovider FileSystem -root c:\users\jeff\documents

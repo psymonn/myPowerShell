@@ -47,3 +47,8 @@ process {
 		Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 	}
 }
+
+#test
+#.\Get-MyAcl.ps1 .\testAcl.txt 
+#.\Set-MyAcl.ps1 -Path .\testAcl.txt -Identity 'TI' -Right fullcontrol -InheritanceFlags None -PropagationFlags None -Type Allow
+#.\Get-MyAcl.ps1 .\testAcl.txt 

@@ -1,0 +1,64 @@
+{
+	"ConfigurationItems": [
+		{ "VirtualMachine": [
+            { "Name": "TESTDC" },
+            { "Memory": "4GB" },
+            { "Generation": "1" },
+            { "SwitchName": "ExternalSwitch" },
+            { "Path": "C:\\VMs" },
+            { "VHD": [
+                { "Path": "C:\\VHDs\\TESTDC.vhdx" },
+                { "Dynamic": "True" },
+                { "AttachedToVmName": "TESTDC" },
+                { "Size": "40GB" }
+            ]
+		}]
+	}, 
+	{ "OperatingSystem": [
+		{ "SystemLocale": "en-US" },
+		{ "Name": "Microsoft Windows Server 2012 R2 Standard"},
+		{ "ProductKey": "XXXX-XXXX-XXXX-XXXX-XXXX"},
+		{ "AdministratorAccount": [
+			{ "Enabled": "True" },
+			{ "Password": "XXXXX" }
+		]},
+		{ "NetworkAdapter": [
+			{ "IPAddress": "192.168.0.156" },
+			{ "DnsServer": "192.168.0.156" }
+		]},
+		{ "FirewallDisabled": "True"},
+		{ "PowerShellExecutionPolicy": "Unrestricted"},
+		{ "DiskConfiguration": [
+			{ "SystemPartition": [
+				{ "Bootable": "False" },
+				{ "FileSystem": "NTFS" },
+				{ "PartitionNumber": "1" },
+				{ "Size": "350MB" }
+			]},
+			{ "OSPartition": [
+				{ "Bootable": "True" },
+				{ "Online": "True" },
+				{ "PartitionNumber": "2" },
+				{ "FileSystem": "NTFS" },
+				{ "DriveLetter": "C" },
+				{ "Size": "40GB" }
+			]}
+		]}
+	]},
+	{ "ActiveDirectory": [
+		{ "Users": [
+
+		]}, 
+		{ "Groups": [
+
+		]}, 
+		{ "OrganizationalUnits": [
+
+		]
+	}]
+	}, 
+	{ "CSVFile": [
+
+	]
+	}]
+}
