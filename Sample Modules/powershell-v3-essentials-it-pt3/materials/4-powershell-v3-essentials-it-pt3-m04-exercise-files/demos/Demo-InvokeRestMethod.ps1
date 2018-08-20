@@ -6,11 +6,14 @@ help Invoke-RestMethod -ShowWindow
 
 #region scraping XML data is easy
 $uri = 'http://mcpmag.com/rss-feeds/prof-powershell.aspx'
-
+$uri ='http://localhost:8080/api/xml'
 $data = Invoke-RestMethod $uri
 $data
+$data.GetEnumerator().job
+$data.GetEnumerator().job|where {$_.name -eq 'Atmosphere2'}
 
-$data | Select Title,Description,
+#$data | Select Title,Description,
+$data | Select Name, Url,
 @{Name="Published";Expression={$_.PubDate -as [datetime]}},Link |
 format-list
 
