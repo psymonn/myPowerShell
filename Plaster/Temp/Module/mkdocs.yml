@@ -1,0 +1,5 @@
+site_name: PsymonModule
+repo_url: https://github.com/PsymonAuthor/PsymonModule
+theme: readthedocs
+pages:
+...

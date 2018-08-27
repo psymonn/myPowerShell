@@ -1,0 +1,5 @@
+site_name: <%= $PLASTER_PARAM_ModuleName %>
+repo_url: https://github.com/<%= $PLASTER_PARAM_GitHubUserName %>/<%= $PLASTER_PARAM_GitHubRepo %>
+theme: readthedocs
+pages:
+...
