@@ -1,0 +1,45 @@
+Using NuGet Package Explorer:
+
+PS F:\GitHub\Source\PSHitchhiker\artifacts> Find-Module -Repository "LocalNuGetFeed"
+
+Version    Name                                Repository           Description
+-------    ----                                ----------           -----------
+1.0.0      NugetExample                        LocalNuGetFeed       My package description.
+4.4.0      Pester                              LocalNuGetFeed       Pester provides a framework for running BDD style Tests to execute and validate PowerShell commands inside of PowerShell and offers a powerful set of Mocking Functions that allow tests to mimic and mock the functionality of any command inside of...
+1.1.3      Plaster                             LocalNuGetFeed       Plaster scaffolds PowerShell projects and files.
+2.8.33     PSHitchhiker                        LocalNuGetFeed       Hitchhikers Guide to the PowerShell Module Pipeline
+1.17.1     PSScriptAnalyzer                    LocalNuGetFeed       PSScriptAnalyzer provides script analysis and checks for potential code defects in the scripts by applying a group of built-in or customized rules on the scripts being analyzed.
+
+
+PS F:\GitHub\Source\PSHitchhiker\artifacts> Install-Module NugetExample -Repository LocalNuGetFeed -verbose
+VERBOSE: Repository details, Name = 'LocalNuGetFeed', Location = 'http://localhost:8087/nuget'; IsTrusted = 'True'; IsRegistered = 'True'.
+VERBOSE: Using the provider 'PowerShellGet' for searching packages.
+VERBOSE: Using the specified source names : 'LocalNuGetFeed'.
+VERBOSE: Getting the provider object for the PackageManagement Provider 'NuGet'.
+VERBOSE: The specified Location is 'http://localhost:8087/nuget' and PackageManagementProvider is 'NuGet'.
+VERBOSE: Searching repository 'http://localhost:8087/nuget/FindPackagesById()?id='NugetExample'' for ''.
+VERBOSE: Total package yield:'1' for the specified package 'NugetExample'.
+VERBOSE: Performing the operation "Install-Module" on target "Version '1.0.0' of module 'NugetExample'".
+VERBOSE: The installation scope is specified to be 'AllUsers'.
+VERBOSE: The specified module will be installed in 'C:\Program Files\WindowsPowerShell\Modules'.
+VERBOSE: The specified Location is 'NuGet' and PackageManagementProvider is 'NuGet'.
+VERBOSE: Downloading module 'NugetExample' with version '1.0.0' from the repository 'http://localhost:8087/nuget'.
+VERBOSE: Searching repository 'http://localhost:8087/nuget/FindPackagesById()?id='NugetExample'' for ''.
+VERBOSE: Searching repository 'http://localhost:8087/nuget/FindPackagesById()?id='PSHitchhiker'' for ''.
+VERBOSE: InstallPackage' - name='PSHitchhiker', version='2.8.4',destination='C:\Users\TI\AppData\Local\Temp\511582799'
+VERBOSE: DownloadPackage' - name='PSHitchhiker', version='2.8.4',destination='C:\Users\TI\AppData\Local\Temp\511582799\PSHitchhiker\PSHitchhiker.nupkg', uri='http://localhost:8087/nuget/Packages(Id='PSHitchhiker',Version='2.8.4')/Download'
+VERBOSE: Downloading 'http://localhost:8087/nuget/Packages(Id='PSHitchhiker',Version='2.8.4')/Download'.
+VERBOSE: Completed downloading 'http://localhost:8087/nuget/Packages(Id='PSHitchhiker',Version='2.8.4')/Download'.
+VERBOSE: Completed downloading 'PSHitchhiker'.
+VERBOSE: Hash for package 'PSHitchhiker' does not match hash provided from the server.
+VERBOSE: InstallPackageLocal' - name='PSHitchhiker', version='2.8.4',destination='C:\Users\TI\AppData\Local\Temp\511582799'
+VERBOSE: InstallPackage' - name='NugetExample', version='1.0.0',destination='C:\Users\TI\AppData\Local\Temp\511582799'
+VERBOSE: DownloadPackage' - name='NugetExample', version='1.0.0',destination='C:\Users\TI\AppData\Local\Temp\511582799\NugetExample\NugetExample.nupkg', uri='http://localhost:8087/nuget/Packages(Id='NugetExample',Version='1.0.0')/Download'
+VERBOSE: Downloading 'http://localhost:8087/nuget/Packages(Id='NugetExample',Version='1.0.0')/Download'.
+VERBOSE: Completed downloading 'http://localhost:8087/nuget/Packages(Id='NugetExample',Version='1.0.0')/Download'.
+VERBOSE: Completed downloading 'NugetExample'.
+VERBOSE: Hash for package 'NugetExample' does not match hash provided from the server.
+VERBOSE: InstallPackageLocal' - name='NugetExample', version='1.0.0',destination='C:\Users\TI\AppData\Local\Temp\511582799'
+VERBOSE: Catalog file 'PSHitchhiker.cat' is not found in the contents of the module 'PSHitchhiker' being installed.
+VERBOSE: Installing the dependency module 'PSHitchhiker' with version '2.8.4' for the module 'NugetExample'.
+VERBOSE: Module 'PSHitchhiker' was installed successfully to path 'C:\Program Files\WindowsPowerShell\Modules\PSHitchhiker\2.8.4'.
