@@ -85,7 +85,7 @@ Get-Module -Name ContosoServer -ListAvailable
 Publish-Module -Name ContosoServer -RequiredVersion 1.5 -Repository LocalRepo -NuGetApiKey Local-Repo-NuGet-ApiKey
 Publish-Module -Path "C:\Program Files\WindowsPowerShell\Modules\ContosoServer\2.0" -Repository LocalRepo -NuGetApiKey Local-Repo-NuGet-ApiKey
 Find-Module -Name ContosoServer -Repository LocalRepo
--------
+------------
 Dependency:
 PS F:\GitHub\Source\PSHitchhiker> Find-Module -Repository LocalNuGetFeed -Name PSHitchhiker -IncludeDependencies |select version,name,repository
 
@@ -95,6 +95,25 @@ Version Name             Repository
 1.1.3   Plaster          LocalNuGetFeed
 4.4.0   Pester           LocalNuGetFeed
 1.17.1  PSScriptAnalyzer LocalNuGetFeed
+
+#-------------------------------------------------------------------------------------------------------------------
+#All about creat module manifest: look for:
+#powershell-modules-advanced-functions-building\6-powershell-modules-advanced-functions-building-m6-exercise-files
+#-------------------------------------------------------------------------------------------------------------------
+(Get-Module -Name MyTools -ListAvailable).PrivateData['PSData']
+
+Import-Module MyTools -Force
+Get-Module -ListAvailable -Name MyTools | select nestedmodules,filelist
+Import-Module MyTools -Force -PassThru | select nestedmodules,filelist
+Get-Command -Module MyTools
+
+New-Item -Path "$($module.ModuleBase)\mytextfile.txt"
+ise $module.Path
+$module = Import-Module MyTools -Force -PassThru
+$module.FileList # currently just for inventorying
+New-Item "$($module.ModuleBase)\Startup.ps1" -ItemType File
+
+
 
 
 
