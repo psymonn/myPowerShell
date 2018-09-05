@@ -70,3 +70,33 @@ Uninstall-Module -name PSHitchhiker -RequiredVersion 1.0.25
 update-module
 save-module
 
+-----------------------------
+#The below example install two version of this module ready to import (use)
+Update-Module -Name PSHitchhiker -RequiredVersion 1.0.22
+Update-Module -Name PSHitchhiker -RequiredVersion 1.0.25
+#install the latest version (now 3 version of PSHitchhiker installed)
+Update-Module -Name PSHitchhiker
+Get-Module -ListAvailable -Name PSHitchhiker | Format-List Name,Version,ModuleBase
+#see all module installed
+Get-InstalledModule
+Get-Module -Name ContosoServer -ListAvailable
+
+----
+Publish-Module -Name ContosoServer -RequiredVersion 1.5 -Repository LocalRepo -NuGetApiKey Local-Repo-NuGet-ApiKey
+Publish-Module -Path "C:\Program Files\WindowsPowerShell\Modules\ContosoServer\2.0" -Repository LocalRepo -NuGetApiKey Local-Repo-NuGet-ApiKey
+Find-Module -Name ContosoServer -Repository LocalRepo
+-------
+Dependency:
+PS F:\GitHub\Source\PSHitchhiker> Find-Module -Repository LocalNuGetFeed -Name PSHitchhiker -IncludeDependencies |select version,name,repository
+
+Version Name             Repository
+------- ----             ----------
+2.8.34  PSHitchhiker     LocalNuGetFeed
+1.1.3   Plaster          LocalNuGetFeed
+4.4.0   Pester           LocalNuGetFeed
+1.17.1  PSScriptAnalyzer LocalNuGetFeed
+
+
+
+
+
