@@ -10,6 +10,10 @@ $FileName = [System.IO.Path]::GetFileName($WebURL)
  $uri = New-Object "System.Uri" "$WebURL"
  $request = [System.Net.HttpWebRequest]::Create($uri)
  
+ $xlr=[psobject].Assembly.GetType('System.Management.Automation.TypeAccelerators')
+ $xlr::Add('accelerators',$xlr)
+ [accelerators]::get
+ 
  [psobject].Assembly.GetType("System.Management.Automation.TypeAccelerators")::Get
  
  Key                          Value

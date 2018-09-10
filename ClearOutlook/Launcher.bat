@@ -1,0 +1,1 @@
+"%windir%\syswow64\windowspowershell\v1.0\powershell.exe" -noprofile -executionpolicy bypass -file ClearOutlook.ps1
