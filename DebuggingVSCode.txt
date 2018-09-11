@@ -1,0 +1,25 @@
+$pid
+
+https://github.com/PowerShell/PowerShell/tree/master/docs/learning-powershell
+
+https://docs.microsoft.com/en-us/powershell/scripting/core-powershell/vscode/using-vscode?view=powershell-6
+
+https://blogs.technet.microsoft.com/heyscriptingguy/2017/02/06/debugging-powershell-script-in-visual-studio-code-part-1/
+
+https://blogs.technet.microsoft.com/heyscriptingguy/2017/02/13/debugging-powershell-script-in-visual-studio-code-part-2/
+
+https://code.visualstudio.com/docs/editor/debugging#_launch-configurations
+
+https://docs.microsoft.com/en-us/powershell/scripting/core-powershell/vscode/using-vscode?view=powershell-6
+
+
+These launch configuration support the following debug scenarios:
+--
+•PowerShell Launch (current file) – This is what we have been using. It launches the file in the active editor window under the debugger. This is how the PowerShell integrated scripting environment (ISE) debugger works.
+
+•PowerShell Attach to Host Process – This allows you to attach to another process that hosts the PowerShell engine and debug script that’s running in that process.
+
+•PowerShell Interactive Session – This attaches the debugger to the Debug Console session. This can be handy for importing your module and debugging it from the Debug Console prompt. This configuration can also be handy if you want to use the Set-PSBreakpoint command to set variable breakpoints, that is, when a variable is read or written. Setting this type of breakpoint is currently not supported by Visual Studio Code.
+
+•PowerShell Script Configuration – Launches the file that’s specified in the configuration by using a path relative to the ${workspaceRoot} configuration variable.
+
