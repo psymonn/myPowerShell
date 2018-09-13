@@ -1,0 +1,20 @@
+Requirements:
+New-ModuleTemplate.ps1           (create folder and copy psm1 file)
+Start-ModuleBuild.ps1            (generate ps1 file and export ps1 file in public folder)
+CopyThisModuleToParentDir.psm1   (import all modules inside private and public folder)
+Parameters.json 	         (share global variables)
+
+
+1. cd C:\Data\Scripts\TestModule\Template (Leave everyting in the template as it)
+
+
+2. run this -> New-ModuleTemplate -ModulePath C:\Data\Scripts\TestModule -ModuleName myNewModule   
+               (create folder structure and copy psm file to parent directory)
+
+3. If Steps 2 failed then do this:
+   Copy -> C:\Data\Scripts\TestModule\Template\ThisModuleToParentDir.psm1
+   To -> C:\Data\Scripts\TestModule  (parent directory)
+
+4. run this -> Start-ModuleBuild -ModuleDirectoryPath C:\Data\Scripts\TestModule\myNewModule -ModuleName myNewModule    
+               (create psd1 file, create extra ps1 files and run again to update any extra ps1 files inside the public folder)
+

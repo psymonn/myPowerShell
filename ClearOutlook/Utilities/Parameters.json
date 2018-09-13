@@ -1,0 +1,4 @@
+{
+"SIT":{"PVSRegex":"SERVER1*","vCentre":"SERVER4"},
+"PROD":{"PVSFilter":"PRODSERVER*"}
+}
