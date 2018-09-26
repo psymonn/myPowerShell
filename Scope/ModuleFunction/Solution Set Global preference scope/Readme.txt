@@ -37,6 +37,17 @@ loaded get-calledPreference - Stop
 
 Note: If you use import-module to your module, the global variables will override all your script variables if after executed Get-CallerPreference module.
 
+Test3:
+No CallerPreference was used:
+PS F:\GitHub\Source\ProjectSamples\Plaster New Project\TemplateProject\GoodSample9\GoodSample9>>> sdfadf com
+Before Set: ErrorActionPreference = Continue
+Set: ErrorActionPreference = SilentlyContinue
+After-PreferenceMultiple Function: ErrorActionPreference = SilentlyContinue
+############2############
+Before Set: ErrorActionPreference = SilentlyContinue
+Set: ErrorActionPreference = Stop
+Init-PreferenceMultiple Function: ErrorActionPreference = Stop
+
 [Conclusion]
 Usage of Get-CallerPreference.ps1:
 (your script as an init caller) If you want to overide all your subsequent scripts use . source
