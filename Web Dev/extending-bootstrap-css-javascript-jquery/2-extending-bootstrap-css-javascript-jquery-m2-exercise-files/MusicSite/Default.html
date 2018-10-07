@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>My Tunes</title>
+  <link href="Content/bootstrap.min.css" rel="stylesheet" />
+  <link href="Content/Site.css" rel="stylesheet" />
+  <link href="Content/pdsa-sidebar.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <header>
+        <a href="Default.html">My Tunes</a>
+      </header>
+    </div>
+    <nav id="sideNavParent" class="pdsa-sn-wrapper">
+      <ul id="sideNavParent">
+        <li class="pdsa-sn-brand">
+          <a href="Default.html" class="visible-sm visible-md visible-lg">Music</a>
+        </li>
+        <li>
+          <a href="Default.html">
+            <span class="visible-sm visible-md visible-lg">Home</span>
+            <i class="glyphicon glyphicon-home visible-xs"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+             data-toggle="collapse"
+             data-target="#ulGenres">
+            <span class="visible-sm visible-md visible-lg">
+              Genres&nbsp;<b class="caret"></b>
+            </span>
+            <i class="glyphicon glyphicon-globe visible-xs"></i>
+          </a>
+          <div class="visible-sm visible-md visible-lg">
+            <ul id="ulGenres" class="collapse" data-parent="#sideNavParent">
+              <li>
+                <a href="#">All Genres</a>
+              </li>
+              <li>
+                <a href="#">Jazz</a>
+              </li>
+              <li>
+                <a href="#">Country</a>
+              </li>
+              <li>
+                <a href="#">Rock</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#"
+             data-toggle="collapse"
+             data-target="#ulPlaylists">
+            <span class="visible-sm visible-md visible-lg">
+              Playlists&nbsp;<b class="caret"></b>
+            </span>
+            <i class="glyphicon glyphicon-list-alt visible-xs"></i>
+          </a>
+          <div class="visible-sm visible-md visible-lg">
+            <ul id="ulPlaylists" class="collapse" data-parent="#sideNavParent">
+              <li>
+                <a href="#">All Playlists</a>
+              </li>
+              <li>
+                <a href="#">My Top Rated</a>
+              </li>
+              <li>
+                <a href="#">Top Country</a>
+              </li>
+              <li>
+                <a href="#">Top Classic Rock</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#">
+            <span class="visible-sm visible-md visible-lg">Songs</span>
+            <i class="glyphicon glyphicon-music visible-xs"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="visible-sm visible-md visible-lg">Download</span>
+            <i class="glyphicon glyphicon-download visible-xs"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container body-content">
+    <div class="row">
+      <div class="col-xs-10 col-lg-12">
+        <h1>
+          My Music
+        </h1>
+        <p>
+          This is where you gather
+          all of your music.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/jquery-1.11.0.min.js"></script>
+  <script src="Scripts/bootstrap.min.js"></script>
+</body>
+</html>

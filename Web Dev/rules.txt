@@ -1,0 +1,26 @@
+HTML Summary:
+
+style-sheet				HTML 
+.bordered-mage			class = "bordered-mage"
+
+header, footer	
+#main					id=main
+#main > form > label    <section id="main"><form><label></form></section>
+same as #main label
+#main input[type=text],
+#main select,
+#main input[type=password],
+#main textarea {width : 150px;}
+
+.simple-form label		class = "bordered-mage simple-form"
+.simple-form input[type=text],
+.simple-form select,
+.simple-form input[type=password],
+.simple-form textarea {width : 150px;}
+
+
+inline-block allow line wrapping.
+vertical-align
+float-right
+
+

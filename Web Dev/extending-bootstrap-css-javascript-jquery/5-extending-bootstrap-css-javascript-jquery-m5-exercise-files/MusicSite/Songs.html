@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Songs</title>
+
+  <!-- *** BEGIN: Styles *** -->
+  <link href="Content/bootstrap.min.css" rel="stylesheet" />
+  <link href="Content/Site.css" rel="stylesheet" />
+  <link href="Content/pdsa-sidebar.css" rel="stylesheet" />
+  <link href="Content/pdsa-summary-block.css" rel="stylesheet" />
+  <link href="Content/pdsa-readme-box.css" rel="stylesheet" />
+  <link href="Content/pdsa-product-selector.css" rel="stylesheet" />
+  <!-- *** END: Styles *** -->
+
+</head>
+<body class="notransition">
+  <div class="container">
+    <!-- *** BEGIN: Header Area *** -->
+    <div class="row">
+      <header>
+        <a href="Default.html">My Tunes</a>
+      </header>
+    </div>
+    <!-- *** END: Header Area *** -->
+    <!-- *** BEGIN: Left Navigation *** -->
+    <nav class="pdsa-sn-wrapper">
+      <ul id="sideNavParent">
+        <li class="pdsa-sn-brand">
+          <a href="Default.html" class="visible-sm visible-md visible-lg">Music</a>
+        </li>
+        <li>
+          <a href="Default.html">
+            <span class="visible-sm visible-md visible-lg">Home</span>
+            <i class="glyphicon glyphicon-home visible-xs"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+             data-toggle="collapse"
+             data-target="#ulMaint">
+            <span class="visible-sm visible-md visible-lg">
+              Genres&nbsp;<b class="caret"></b>
+            </span>
+            <i class="glyphicon glyphicon-globe visible-xs"></i>
+          </a>
+          <div class="visible-sm visible-md visible-lg">
+            <ul id="ulMaint" class="collapse" data-parent="#sideNavParent">
+              <li>
+                <a href="Genres.html">All Genres</a>
+              </li>
+              <li>
+                <a href="Jazz.html">Jazz</a>
+              </li>
+              <li>
+                <a href="Country.html">Country</a>
+              </li>
+              <li>
+                <a href="Rock.html">Rock</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#"
+             data-toggle="collapse"
+             data-target="#ulLookup">
+            <span class="visible-sm visible-md visible-lg">
+              Playlists&nbsp;<b class="caret"></b>
+            </span>
+            <i class="glyphicon glyphicon-list-alt visible-xs"></i>
+          </a>
+          <div class="visible-sm visible-md visible-lg">
+            <ul id="ulLookup" class="collapse" data-parent="#sideNavParent">
+              <li>
+                <a href="Playlists.html">All Playlists</a>
+              </li>
+              <li>
+                <a href="#">My Top Rated</a>
+              </li>
+              <li>
+                <a href="#">Top Country</a>
+              </li>
+              <li>
+                <a href="#">Top Classic Rock</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="Songs.html">
+            <span class="visible-sm visible-md visible-lg">Songs</span>
+            <i class="glyphicon glyphicon-music visible-xs"></i>
+          </a>
+        </li>
+        <li>
+          <a href="Download.html">
+            <span class="visible-sm visible-md visible-lg">Download</span>
+            <i class="glyphicon glyphicon-download visible-xs"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- *** END: Left Navigation *** -->
+  </div>
+
+  <!-- *** BEGIN: Body Content *** -->
+  <div class="container body-content">
+    <div class="row">
+      <div class="col-sm-6">
+        <h3>Select Albums to Purchase</h3>
+      </div>
+      <div class="col-sm-5 total-area">
+        <span>Total:</span>
+        <span id="total">$0.00</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="text-center col-xs-12">
+        <h3>Display...</h3>
+        <div class="well well-sm">
+          <div class="btn-group" data-toggle="buttons" id="songSelect">
+            <label class="btn btn-default">
+              <span class="glyphicon glyphicon-unchecked"></span>
+              <input type="radio" /> All Songs
+            </label>
+            <label class="btn btn-default">
+              <span class="glyphicon glyphicon-unchecked"></span>
+              <input type="radio" /> Selected
+            </label>
+            <label class="btn btn-default">
+              <span class="glyphicon glyphicon-unchecked"></span>
+              <input type="radio" /> Unselected
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            <span class="title">Southern Style</span>
+            <span class="desc">Darius Rucker</span>
+            <span class="price">$10.00</span>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <span class="glyphicon glyphicon-unchecked"></span>
+                <input id="chk1" type="checkbox" name="products" checked="checked" />
+                <label for="chk1">Not Selected</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            <span class="title">Based On a True Story</span>
+            <span class="desc">Blake Shelton</span>
+            <span class="price">$13.00</span>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <span class="glyphicon glyphicon-unchecked"></span>
+                <input id="chk2" type="checkbox" name="products" />
+                <label for="chk2">Not Selected</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            <span class="title">Tom Cat</span>
+            <span class="desc">Tom Scott &amp; the L.A. Express</span>
+            <span class="price">$7.00</span>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <span class="glyphicon glyphicon-unchecked"></span>
+                <input id="chk2" type="checkbox" name="products" />
+                <label for="chk2">Not Selected</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            <span class="title">The Best of Richard Elliot</span>
+            <span class="desc">Richard Elliot</span>
+            <span class="price">$12.00</span>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <span class="glyphicon glyphicon-unchecked"></span>
+                <input id="chk3" type="checkbox" name="products" />
+                <label for="chk3">Not Selected</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            <span class="title">Drunk Enough to Dance</span>
+            <span class="desc">Bowling for Soup</span>
+            <span class="price">$9.00</span>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <span class="glyphicon glyphicon-unchecked"></span>
+                <input id="chk3" type="checkbox" name="products" />
+                <label for="chk3">Not Selected</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            <span class="title">Back In Black</span>
+            <span class="desc">AC/DC</span>
+            <span class="price">$11.00</span>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <span class="glyphicon glyphicon-unchecked"></span>
+                <input id="chk3" type="checkbox" name="products" />
+                <label for="chk3">Not Selected</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- *** END: Body Content *** -->
+  <!-- *** BEGIN: Scripts *** -->
+  <script src="Scripts/jquery-1.11.0.min.js"></script>
+  <script src="Scripts/bootstrap.min.js"></script>
+  <script src="Scripts/pdsa-product-selector.js"></script>
+  <script src="Scripts/pdsa-numberformat.js"></script>
+  <script src="Scripts/pdsa-common.js"></script>
+  <!-- *** END: Scripts *** -->
+  
+  <script>
+    $(document).ready(function () {
+      $("#songSelect .btn").on('click', function () {
+        ToggleRadioButtons("#songSelect", $(this));
+      });
+    });
+
+    function ToggleRadioButtons(groupName, current) {
+      $(groupName + " .glyphicon-record")
+      .removeClass("glyphicon-record")
+      .addClass("glyphicon-unchecked");
+
+      current.find(":first-child")
+      .removeClass("glyphicon-unchecked")
+      .addClass("glyphicon-record");
+    }
+  </script>
+</body>
+</html>

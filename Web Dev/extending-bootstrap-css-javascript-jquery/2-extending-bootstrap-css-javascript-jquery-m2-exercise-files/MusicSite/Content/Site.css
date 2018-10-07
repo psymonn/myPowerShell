@@ -1,0 +1,29 @@
+﻿.container {
+  width: 100%;
+}
+
+.body-content {
+  margin-left: 14em;
+  margin-top: 1em;
+  width: 85%;
+    transition: margin-left 0.3s linear;
+  -moz-transition: margin-left 0.3s linear;
+  -webkit-transition: margin-left 0.3s linear;
+}
+
+header {
+  padding: .7em;
+  background-color: gray;
+  color: white;
+  font-size: large;
+}
+
+  header a {
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+  }
+
+    header a:hover {
+      text-decoration: none;
+    }

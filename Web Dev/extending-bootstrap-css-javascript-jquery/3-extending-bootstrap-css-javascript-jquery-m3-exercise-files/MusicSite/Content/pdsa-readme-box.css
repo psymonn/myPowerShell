@@ -1,0 +1,101 @@
+﻿/* *********************************** */
+/* BEGIN: PDSA Readme Box Color Themes */
+/* *********************************** */
+.pdsa-readme-box-primary {
+  border-color: #428bca;
+}
+
+  .pdsa-readme-box-primary .readme-header {
+    background-color: #428bca;
+  }
+
+  .pdsa-readme-box-primary .readme-footer a {
+    color: deepskyblue;
+  }
+
+.pdsa-readme-box-success {
+  border-color: #3c763d;
+}
+
+  .pdsa-readme-box-success .readme-header {
+    background-color: green;
+  }
+
+  .pdsa-readme-box-success .readme-footer a {
+    color: red;
+  }
+
+.pdsa-readme-box-info {
+  border-color: #31708f;
+}
+
+  .pdsa-readme-box-info .readme-header {
+    background-color: #31708f;
+  }
+
+  .pdsa-readme-box-info .readme-footer a {
+    color: red;
+  }
+/* ********************************* */
+/* END: PDSA Readme Box Color Themes */
+/* ********************************* */
+
+/* ************************************************* */
+/* BEGIN: Readme Box Display                         */
+/* The following styles are for a readme box display */
+/* ************************************************* */
+.pdsa-readme-box {
+  position: relative;
+  border-style: solid;
+  border-width: 0.1em;
+  width: 100%;
+  padding: 1em;
+  opacity: 0.9;
+  margin: 0.3em;
+}
+
+  .pdsa-readme-box:hover {
+    opacity: 1;
+  }
+
+  .pdsa-readme-box .readme-header {
+    margin: -1em;
+    padding: 0.5em;
+    text-align: center;
+  }
+
+    .pdsa-readme-box .readme-header i,
+    .pdsa-readme-box .readme-header div {
+      font-size: xx-large;
+    }
+
+  .pdsa-readme-box .readme-body {
+    position: relative;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+    .pdsa-readme-box .readme-body h1 {
+      font-size: x-large;
+    }
+
+    .pdsa-readme-box .readme-body p {
+      font-size: medium;
+    }
+
+  .pdsa-readme-box .readme-footer {
+    position: absolute;
+    bottom: 0em;
+    right: 0em;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 0.5em;
+    font-size: small;
+  }
+
+    .pdsa-readme-box .readme-footer a {
+      text-decoration: none;
+    }
+/* *********************************************** */
+/* END: Readme Box Display                         */
+/* *********************************************** */

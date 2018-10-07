@@ -1,0 +1,34 @@
+﻿/* BEGIN: Product Selector Styles */
+.title {
+   display: block;
+   font-weight: bold;
+   font-size: 1.5em;
+}
+
+.desc {
+   display: block;
+   font-size: 1.25em;
+}
+
+.price {
+   font-size: 1.25em;
+}
+
+.panel-body {
+   min-height: 7em;
+}
+
+.total-area {
+   margin-top: 2em;
+   font-size: medium;
+   font-weight: bold;
+   text-align: right;
+}
+
+/* Check Boxes in Buttons */
+.btn-group .btn span,
+.btn-group .btn input[type='checkbox'] {
+	padding-top: 0.5em;
+	padding-bottom: 0em;
+}
+/* END: Product Selector Styles */

@@ -1,0 +1,28 @@
+﻿/**********************************/
+/* BEGIN: Progress Message Styles */
+/**********************************/
+.pdsa-submit-progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 6em;
+  z-index: 1;
+  /* The following properties are the ones most likely to change */
+  width: 20em;
+  /* Set 'margin-left' to a negative number that is 1/2 of 'width'. 
+         This centers the block due to the 'left: 50%' property */
+  margin-left: -10em;
+  padding-top: 2.5em;
+  padding-left: 2.1em;
+  background-color: black;
+  color: white;
+  -webkit-border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  border-radius: 0.4em;
+  box-shadow: 0.4em 0.4em rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0.4em 0.4em rgba(0,0,0,0.6);
+  -moz-box-shadow: 0.4em 0.4em rgba(0,0,0,0.6);
+}
+/********************************/
+/* END: Progress Message Styles */
+/********************************/
