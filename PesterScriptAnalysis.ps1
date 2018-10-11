@@ -1,3 +1,5 @@
+#.\ScriptAnalysisCustomRules.test.ps1 -path 'C:\Data\Git\ProjectTemplateTest\ProjectTemplateGenerate5\ProjectTemplateGenerate5' -CustomRulePath 'C:\Data\Git\ProjectTemplateTest\ProjectTemplateGenerate5\Tests\CustomRules.psm1'
+
 Param (
 [String]$Path,
 [String]$CustomRulePath
