@@ -1,0 +1,18 @@
+curl -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/api/json?pretty=true
+
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true&tree=jobs[name,color]"
+
+(not sure what these does):
+curl -s -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/crumbIssuer/api/json
+{"_class":"hudson.security.csrf.DefaultCrumbIssuer","crumb":"d59816d2caa2b489d0cda1870bed35d7","crumbRequestField":"Jenkins-Crumb"}
+curl -s -u admin:eb4fa00a67267495c9d747d6c7524b88 -H 'Jenkins-Crumb:d59816d2caa2b489d0cda1870bed35d7' http://localhost:8080/job/Test1 -d 'VariableTest=apple'
+
+remote-trigger build:
+http://localhost:8080/job/Test1/build?token=testToken
+or
+http://localhost:8080/job/Test1/buildWithParameters?token=testToken
+or
+http://localhost:8080/job/Test1/buildWithParameters?token=testToken&VariableTest=pear  (didn't work)
+
+
+
