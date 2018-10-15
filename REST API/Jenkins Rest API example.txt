@@ -5,7 +5,9 @@ curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/jso
 (not sure what these does):
 curl -s -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/crumbIssuer/api/json
 {"_class":"hudson.security.csrf.DefaultCrumbIssuer","crumb":"d59816d2caa2b489d0cda1870bed35d7","crumbRequestField":"Jenkins-Crumb"}
-curl -s -u admin:eb4fa00a67267495c9d747d6c7524b88 -H 'Jenkins-Crumb:d59816d2caa2b489d0cda1870bed35d7' http://localhost:8080/job/Test1 -d 'VariableTest=apple'
+curl -s -u admin:eb4fa00a67267495c9d747d6c7524b88 -H 'Jenkins-Crumb:d59816d2caa2b489d0cda1870bed35d7' http://localhost:8080/job/Test1/build -d 'VariableTest=apple'
+
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -H 'Jenkins-Crumb:d59816d2caa2b489d0cda1870bed35d7' http://localhost:8080/job/Test1/build -d 'VariableTest=apple'
 
 remote-trigger build:
 http://localhost:8080/job/Test1/build?token=testToken
@@ -13,6 +15,82 @@ or
 http://localhost:8080/job/Test1/buildWithParameters?token=testToken
 or
 http://localhost:8080/job/Test1/buildWithParameters?token=testToken&VariableTest=pear  (didn't work)
+
+curl http://localhost:8080/job/Test1/buildWithParameters?token=testToken&VariableTest=pear" --request POST
+
+curl -s www.xxx.com/joba/buildWithParameters?token=SecretOnlyForjoba\&param=b"
+
+works:
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build?token=testToken --data-urlencode json="{\"parameter\": [{\"name\":\"Computer\", \"value\":\"DESKTOP-N5523PQ\"}, {\"name\":\"FileName\", \"value\":\"testme.txt\"}, {\"name\":\"FileContent\", \"value\":\"hello%20test\"}]}"
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://192.168.0.9:8080/job/Create%20Text%20File%20Remotely/build?token=testToken --data-urlencode json="{\"parameter\": [{\"name\":\"Computer\", \"value\":\"LAB-DC-01\"}, {\"name\":\"FileName\", \"value\":\"testme.txt\"}, {\"name\":\"FileContent\", \"value\":\"hello%20test\"}]}"
+
+works (return 201):
+curl -v -X POST http://localhost:8080/job/eMailNotifications%20Pipeline/build -u admin:eb4fa00a67267495c9d747d6c7524b88
+
+
+didn't work
+curl -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/job/Create%20Text%20File%20Remotely/buildWithParameters?token=testToken\&Computer=DESKTOP-N5523PQ -request POST
+curl -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/job/Create%20Text%20File%20Remotely/buildWithParameters?token=testToken\&Computer=DESKTOP-N5523PQ\&FileName=testme.txt\&FileContent=hello -request POST
+
+http://localhost:8080/job/Create%20Text%20File%20Remotely?token=testToken
+
+works:
+curl http://localhost:8080/job/Create%20Text%20File%20Remotely/api/json?pretty=true
+
+
+curl -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build -u admin:eb4fa00a67267495c9d747d6c7524b88 -data-urlencode json='{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}, {"name":"FileContent", "value":"hello test"}]}'
+curl -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build -u admin:eb4fa00a67267495c9d747d6c7524b88 -data-urlencode json='{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}]}'
+
+curl -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build/buildWithParameters?token=testToken\&Computer=DESKTOP-N5523PQ -request POST
+
+
+curl -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build -user USER:TOKEN -data-urlencode json='{"parameter": [{"name":"id", "value":"123"}, {"name":"verbosity", "value":"high"}]}'
+curl -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build -d json='{"parameter": [{"name":"id", "value":"123"}, {"name":"verbosity", "value":"high"}]}'
+
+curl -v http://localhost:8080/job/Create%20Text%20File%20Remotely/build?token=testToken -H "Jenkins-Crumb:d59816d2caa2b489d0cda1870bed35d7"  --form json='{"parameter": [{"name":"Computer", "file":"file0"}]}'
+
+curl -X POST -g -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/job/Create%20Text%20File%20Remotely/build?token=testToken --data-urlencode json='{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}, {"name":"FileContent", "value":"hello test"}]}'
+
+curl -X POST -g -u admin:eb4fa00a67267495c9d747d6c7524b88 http://localhost:8080/job/Create%20Text%20File%20Remotely/build --data token=testToken --data-urlencode json='{"parameter": [{"name":"FOO", "value":"foo"}, {"name":"BAR", "value":"bar"}]}'
+
+no error:
+curl -v -X POST -H 'Jenkins-Crumb:d59816d2caa2b489d0cda1870bed35d7' http://localhost:8080/job/Create%20Text%20File%20Remotely -d 'Computer=DESKTOP-N5523PQ' -u admin:eb4fa00a67267495c9d747d6c7524b88 
+curl -v -g -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely --form json="{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}]}"
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely --form json="{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}, {"name":"FileContent", "value":"hello%20test"}]}"
+
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/Build?token=testToken --data-urlencode json="{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}, {"name":"FileContent", "value":"hello%20test"}]}"
+
+
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build?token=testToken --data-urlencode json="{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}, {"name":"FileContent", "value":"hello%20test"}]}"
+return 302
+
+
+
+
+http://JENKINS_SERVER_ADDRESS/job/YOUR_JOB_NAME/buildWithParameters?myparam=myparam_value
+
+curl http://admin:test123@localhost:30637/job/apd-test/buildWithParameters?userFlag=false --request POST
+
+RESTCallsUtility.invokePostMethod(auth, "<host>/Services/job/Jira2BugDB/buildWithParameters?token=jira2bugdb_remote&Operation=create-single&Argument="+projectKey, "data") 
+
+curl -v 'http://url/job/parameterized-test/build?token=buildtoken' -H "Jenkins-Crumb:8f4d0320c04619f6302301789b2b65ec"  --form file0=@index.html --form json='{"parameter": [{"name":"files/abc.zip", "file":"file0"}]}'
+
+
+
+
+-g/--globoff
+              This  option  switches  off  the "URL globbing parser". When you set this option, you can
+              specify URLs that contain the letters {}[] without having them being interpreted by  curl
+              itself.  Note  that  these  letters  are not normal legal URL contents but they should be
+              encoded according to the URI standard.
+------------------------------------------------------------------------------------
+Jenkin cli:
+http://localhost:8080/cli/
+download : jenkins-cli.jar
+at dos prompt: java -jar jenkins-cli.jar -s http://localhost:8080/ help
+ssh public keys: http://localhost:8080/user/admin/configure
+Anyone can do anything: http://localhost:8080/configureSecurity/
+
 
 
 
