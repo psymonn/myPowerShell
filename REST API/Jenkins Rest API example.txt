@@ -64,7 +64,7 @@ curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/
 curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build?token=testToken --data-urlencode json="{"parameter": [{"name":"Computer", "value":"DESKTOP-N5523PQ"}, {"name":"FileName", "value":"testme.txt"}, {"name":"FileContent", "value":"hello%20test"}]}"
 return 302
 
-
+https://www.powershellgallery.com/packages/Jenkins/1.0.0.140/Content/Jenkins.psm1
 
 
 http://JENKINS_SERVER_ADDRESS/job/YOUR_JOB_NAME/buildWithParameters?myparam=myparam_value
