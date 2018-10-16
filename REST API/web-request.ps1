@@ -1,3 +1,5 @@
+#https://www.powershellgallery.com/packages/Jenkins/1.0.0.140/Content/Jenkins.psm1
+
 # Create Header
              $AuthInfo = "[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f 'admin', 'pass')))"
 
