@@ -211,7 +211,7 @@ Function New-StatusMessage
 
 New-StatusMessage -MessageType Status -Message "testCase3" -AuthInfo c2ltb24ubmd1eWVuNF9wcml2Ok5ndXlAbjU0NzY3Nw== -Uri https://dev52858.service-now.com/api/now/table/rm_task/7a7fc8ff4f4123001c6ff82ca310c701
 
-[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "simon.nguyen4_priv", "dasfasdf")))
+[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "userid", "password")))
 c2ltb24ubmd1eWVuNF9wcml2Ok5ndXlAbjU0NzY3Nw==
 
 
