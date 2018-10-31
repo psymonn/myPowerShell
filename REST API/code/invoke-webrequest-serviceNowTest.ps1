@@ -211,7 +211,7 @@ Function New-StatusMessage
 
 New-StatusMessage -MessageType Status -Message "testCase3" -AuthInfo c2ltb24ubmd1eWVuNF9wcml2Ok5ndXlAbjU0NzY3Nw== -Uri https://dev52858.service-now.com/api/now/table/rm_task/7a7fc8ff4f4123001c6ff82ca310c701
 
-[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "userid", "password")))
+[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "user", "password")))
 c2ltb24ubmd1eWVuNF9wcml2Ok5ndXlAbjU0NzY3Nw==
 
 
@@ -224,3 +224,7 @@ New-StatusMessage -MessageType Status -Message "test result message" -AuthInfo c
 
 u_test_results.list
 u_test_results.form
+
+--------------------------------------------------
+Jenkins:
+New-StatusMessage -MessageType Status -Message "testCase3" -AuthInfo YWRtaW46Wm5yb3A1NDc2Nzc= -Uri "http://localhost:8080/api/json?pretty=true"

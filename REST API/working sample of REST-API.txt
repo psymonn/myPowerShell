@@ -1,0 +1,68 @@
+works:
+query:
+curl "https://dev52858.service-now.com/api/now/table/u_test_results?sysparm_limit=1" --request GET --header "Accept:application/json" --user $user:$password
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true"
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true&tree=jobs[name,color]"
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true&tree=jobs[name,color]{0}"
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true&tree=jobs[name,color]{1}"
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true&tree=jobs[name,color]{0,3}"
+curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?tree=allBuilds[name,color]
+
+
+Invoke-restmethod -uri http://localhost:8080/api/json?pretty=true
+
+
+Invoke-WebRequest -uri http://localhost:8080/api/json?pretty=true
+
+download:
+
+curl -g -u "admin:eb4fa00a67267495c9d747d6c7524b88" "http://localhost:8080/job/WebSite/api/json/config.xml" -o config.xml
+
+upload:
+
+curl -X POST -user "admin:eb4fa00a67267495c9d747d6c7524b88"  "http://localhost:8080/job/Project Template Generate pipeline/config.xml" -d "@config.xml"
+
+works:
+Parameterized Remote Trigger Plugin:
+https://wiki.jenkins.io/display/JENKINS/Parameterized+Remote+Trigger+Plugin
+Note: can trigger a job (via freestyle only) and passing through parameters
+      can create a 
+
+
+Trigger a build with parameters:
+sample format:
+curl -X POST http://JENKINS_URL/job/JOB_NAME/build  --form file0=@/home/user/Desktop/sample.xml --form json='{"parameter": [{"name":"harness/Task.xml", "file":"file0"}]}'
+
+works:
+(no Trigger builds remotely was setup)
+curl -v -X POST http://localhost:8080/job/eMailNotifications%20Pipeline/build -u admin:eb4fa00a67267495c9d747d6c7524b88
+
+(Trigger builds remotely was setup)
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File%20Remotely/build?token=testToken --data-urlencode json="{\"parameter\": [{\"name\":\"Computer\", \"value\":\"DESKTOP-N5523PQ\"}, {\"name\":\"FileName\", \"value\":\"testme.txt\"}, {\"name\":\"FileContent\", \"value\":\"hello%20test\"}]}"
+
+(no Trigger builds remotely was setup)																		
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File/build --data-urlencode json="{\"parameter\": [{\"name\":\"Filename\", \"value\":\"MyFirstFile\"}, {\"name\":\"Message\", \"value\":\"what is it\"}]}
+
+(Trigger builds remotely was setup)																		
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File/build?token=testToken --data-urlencode json="{\"parameter\": [{\"name\":\"Filename\", \"value\":\"MyFirstFile\"}, {\"name\":\"Message\", \"value\":\"what is it\"}]}
+
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File/build?token=testToken --form json="{\"parameter\": [{\"name\":\"Filename\", \"value\":\"MyFirstFile\"}, {\"name\":\"Message\", \"value\":\"what is it\"}]}
+
+(Trigger builds remote was setup and attachment)
+curl -v -u admin:eb4fa00a67267495c9d747d6c7524b88 -X POST http://localhost:8080/job/Create%20Text%20File/build?token=testToken --form file0=@"F:\scripts\test.XML" --form json="{\"parameter\": [{\"name\":\"Filename\", \"value\":\"MyFirstFile\"}, {\"name\":\"Message\", \"value\":\"what is it\"}, {\"name\":\"Task.xml\", \"file\":\"file0\"}]}
+  
+
+Invoke-WebRequest:
+https://www.jokecamp.com/blog/invoke-restmethod-powershell-examples/
+https://stackoverflow.com/questions/24706386/does-invoke-webrequest-support-arrays-as-post-form-parameters
+Learning:
+https://www.gngrninja.com/script-ninja/2016/7/8/powershell-getting-started-utilizing-the-web#forms
+
+curl serviceNow:
+https://docs.servicenow.com/bundle/geneva-servicenow-platform/page/integrate/inbound_rest/reference/r_TableAPICurlExamples.html
+
+
+
+
+
+
