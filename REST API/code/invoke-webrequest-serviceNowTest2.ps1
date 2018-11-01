@@ -160,7 +160,22 @@ Function New-StatusMessage
                 #$Body = @{Message='me';Field='qwerty'} | ConvertTo-Json
 
                # $Body = "{ 'Message':3661515, 'Field':'test', work_notes: 'test work_notes'}"
-                $Body = "{ 'parameter': [{'Filename':'MyFirstFile', 'Message':'what is it'}]}"
+                #$Body = "{ 'parameter': [{'Filename':'MyFirstFile', 'Message':'what is it'}]}"
+
+
+                $Body = @{
+                        "parameter" = @(
+                                        @{
+                                            name = "Filename"
+                                            value = "MyFirstFile"
+                                        },
+                                        @{
+                                            name = "Message"
+                                            value = "what is it"
+                                        }
+                                      )
+                        } | ConvertTo-Json
+
 
                 write-host "body message: $Body"
 
@@ -168,7 +183,7 @@ Function New-StatusMessage
                     Headers = $headers
                     Method = 'POST'
                     Uri = $Uri
-                    Body = $Body
+                    Body = @{ json = $Body }
                 }
             }
             Else
