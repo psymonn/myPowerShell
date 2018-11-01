@@ -1,0 +1,5 @@
+https://www.jokecamp.com/blog/invoke-restmethod-powershell-examples/
+http://www.laurierhodes.info/?q=node/121
+https://www.powershellgallery.com/packages/Jenkins/1.0.0.140/Content/Jenkins.psm1
+https://www.powershellgallery.com/packages/oneliners/1.0.1.90/Content/functions%5Cinvoke-jenkins.ps1
+https://www.smartfile.com/blog/trigger-jenkins-builds-using-powershell/
