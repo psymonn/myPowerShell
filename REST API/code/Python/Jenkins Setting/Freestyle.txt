@@ -1,0 +1,12 @@
+Exectute Windows batch command:
+SET PATH=%PATH%; %PYTHON_PATH%;
+C:\Users\TI\AppData\Local\Programs\Python\Python37-32\python.exe F:\scripts\Python\jobstatus.py
+REM C:\Users\TI\AppData\Local\Programs\Python\Python37-32\python.exe F:\scripts\Python\jenkinsJobConsoleOutput.py
+C:\Users\TI\AppData\Local\Programs\Python\Python37-32\python.exe F:\scripts\Python\publish_jenkins_results.py "PSHitchHiker Pineline" 37
+
+
+ShiningBear:
+C:\Users\TI\AppData\Local\Programs\Python\Python37-32
+Shell
+python F:\scripts\Python\hello.py
+
