@@ -1,4 +1,7 @@
 works:
+Jenkins testreport:
+http://localhost:8080/job/WebSite%20pipeline/102/testReport/api/json?pretty=true
+
 query:
 curl "https://dev52858.service-now.com/api/now/table/u_test_results?sysparm_limit=1" --request GET --header "Accept:application/json" --user $user:$password
 curl -g -u admin:eb4fa00a67267495c9d747d6c7524b88 "http://localhost:8080/api/json?pretty=true"
