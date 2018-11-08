@@ -1,6 +1,7 @@
 FileSystem Hosting:
 Get-PSRepository
 Register-PSRepository -Name "PsymonCorp" -SourceLocation "F:\Shared Folder\Repo" -InstallationPolicy Trusted
+Register-PSRepository -Name "LocalFileBase" -SourceLocation "C:\Data\App\LocalFileSharing" -InstallationPolicy Trusted
 
 Get-PSRepository
 Find-Module -Repository "PsymonCorp"
