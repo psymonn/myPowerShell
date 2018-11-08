@@ -1,0 +1,91 @@
+-----------------------
+Windows 2012 R2 Issue:
+-----------------------
+PS C:\Users\Administrator> Set-ExecutionPolicy unrestricted
+
+PS C:\Users\Administrator> $PSVersionTable
+
+Name                           Value
+----                           -----
+PSVersion                      4.0
+WSManStackVersion              3.0
+SerializationVersion           1.1.0.1
+CLRVersion                     4.0.30319.33440
+BuildVersion                   6.3.9600.16384
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
+PSRemotingProtocolVersion      2.2
+
+PS C:\Users\Administrator> import-module psake
+import-module : The specified module 'psake' was not loaded because no valid module file was found in any module
+directory.
+At line:1 char:1
++ import-module psake
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (psake:String) [Import-Module], FileNotFoundException
+    + FullyQualifiedErrorId : Modules_ModuleNotFound,Microsoft.PowerShell.Commands.ImportModuleCommand
+PS C:\Users\Administrator> import-module psake
+import-module : The specified module 'psake' was not loaded because no valid module file was found in any module
+directory.
+At line:1 char:1
++ import-module psake
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (psake:String) [Import-Module], FileNotFoundException
+    + FullyQualifiedErrorId : Modules_ModuleNotFound,Microsoft.PowerShell.Commands.ImportModuleCommand
+
+Tried saving psake (any module) on all PSModulePath as below and it is still won't work using import-module (issue with module discovery)
+PS C:\Users\Administrator.VIAMONSTRA> $env:PSModulePath -split ';'
+C:\Users\Administrator.VIAMONSTRA\Documents\WindowsPowerShell\Modules
+C:\Program Files\WindowsPowerShell\Modules
+C:\windows\system32\WindowsPowerShell\v1.0\Modules\
+C:\Program Files (x86)\Microsoft SQL Server\120\Tools\PowerShell\Modules\
+c:\data\modules
+
+-------------
+Solution:
+-------------
+Download and install on windows 2012 r2:
+Win8.1AndW2K12R2-KB3191564-x64.msu
+
+PS C:\Users\Administrator.VIAMONSTRA> $PSVersionTable
+
+Name                           Value
+----                           -----
+PSVersion                      5.1.14409.1005
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.14409.1005
+CLRVersion                     4.0.30319.34011
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1
+
+
+PS C:\Users\Administrator.VIAMONSTRA> import-module psake
+PS C:\Users\Administrator.VIAMONSTRA> get-module
+
+ModuleType Version    Name                                ExportedCommands
+---------- -------    ----                                ----------------
+Manifest   3.1.0.0    Microsoft.PowerShell.Management     {Add-Computer, Add-Content, Checkpoint-Computer, Clear-Con...
+Manifest   3.1.0.0    Microsoft.PowerShell.Utility        {Add-Member, Add-Type, Clear-Variable, Compare-Object...}
+Script     4.7.3      psake                               {Assert, Exec, FormatTaskName, Framework...}
+
+
+PS C:\Users\Administrator.VIAMONSTRA> import-module PSScriptAnalyzer
+PS C:\Users\Administrator.VIAMONSTRA> get-module
+
+ModuleType Version    Name                                ExportedCommands
+---------- -------    ----                                ----------------
+Manifest   3.1.0.0    Microsoft.PowerShell.Management     {Add-Computer, Add-Content, Checkpoint-Computer, Clear-Con...
+Manifest   3.1.0.0    Microsoft.PowerShell.Utility        {Add-Member, Add-Type, Clear-Variable, Compare-Object...}
+Script     4.7.3      psake                               {Assert, Exec, FormatTaskName, Framework...}
+Script     1.17.1     PSScriptAnalyzer                    {Get-ScriptAnalyzerRule, Invoke-Formatter, Invoke-ScriptAn...
+
+
+PS C:\Users\Administrator.VIAMONSTRA> $env:PSModulePath -split ';'
+C:\Users\Administrator.VIAMONSTRA\Documents\WindowsPowerShell\Modules
+C:\Program Files\WindowsPowerShell\Modules
+C:\windows\system32\WindowsPowerShell\v1.0\Modules\
+C:\Program Files (x86)\Microsoft SQL Server\120\Tools\PowerShell\Modules\
+c:\data\modules
+
+
