@@ -1,1 +1,11 @@
  powershell 'C:\\Users\\TI\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe F:\\scripts\\Python\\hello.py'
+ 
+  stage 'execute, testing'
+    	bat '''echo "BUILD_NUMBER"  %BUILD_ID%
+               echo "JOB_NAME"  %JOB_NAME%
+               SET BUILD_ID = %BUILD_ID%
+               SET JOB_NAME = %JOB_NAME%
+               '''
+        powershell 'Write-Output "Hello, World!"'
+        powershell 'C:\\Users\\TI\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe F:\\scripts\\Python\\hello.py'
+        powershell 'C:\\Users\\TI\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe F:\\scripts\\Python\\publish_jenkins_results.py $Env:JOB_NAME $Env:BUILD_ID'
