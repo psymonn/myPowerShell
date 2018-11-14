@@ -18,7 +18,7 @@ Local NuGet Server Feed Hosting:
 Install-PackageProvider Nuget -Force (C:\Program Files\PackageManagement\ProviderAssemblies\nuget\2.8.5.208\Microsoft.PackageManagement.NuGetProvider.dll)
 Unregister-PSRepository LocalNuGetFeed
 Get-PSRepository
-Register-PSRepository -Name "LocalNuGetFeed" -SourceLocation "http://localhost:8087/nuget" -InstallationPolicy Trusted
+Register-PSRepository -Name "LocalNuGetFeed" -SourceLocation "http://localhost:8082/nuget" -PublishLocation "http://localhost:8082/nuget" -InstallationPolicy Trusted
 Find-Module -name "PSHitchhiker" -Repository "LocalNuGetFeed" | Install-Module -Name "PSHitchhiker" -Scope "CurrentUser"
 Find-Module -Repository "LocalNuGetFeed"
 Find-Module -Repository "LocalNuGetFeed" -IncludeDependencies
