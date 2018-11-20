@@ -64,8 +64,8 @@ https://www.gngrninja.com/script-ninja/2016/7/8/powershell-getting-started-utili
 curl serviceNow:
 https://docs.servicenow.com/bundle/geneva-servicenow-platform/page/integrate/inbound_rest/reference/r_TableAPICurlExamples.html
 
-
-
+Enter on URL:
+http://localhost:8080/job/Python%20test%20pipeline/buildWithParameters?requestID=REQ9876
 
 
 
