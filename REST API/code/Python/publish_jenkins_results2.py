@@ -12,12 +12,12 @@ parser.add_argument("build")
 parser.add_argument("request_id")
 args = parser.parse_args()
 
-JENKINS_URL = 'http://10.211.217.25:8080'
-JENKINS_USER = 'Admin'
-JENKINS_PASS = 'Znrop547677'
-SNC_URL = 'https://dev52858.service-now.com'
-SNC_USER = 'simon.nguyen4_priv'
-SNC_PASS = 'Nguy@n547677'
+JENKINS_URL = 'http://localhost:8080'
+JENKINS_USER = 'user'
+JENKINS_PASS = 'passwrod'
+SNC_URL = 'https://ServiceNowInstance.service-now.com'
+SNC_USER = 'user'
+SNC_PASS = 'Password'
 
 def publish_results():
 
