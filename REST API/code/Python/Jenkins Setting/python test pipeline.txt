@@ -1,0 +1,51 @@
+
+node('master') {
+
+  stage('Stage 3: Test') {
+      
+    properties([
+      parameters([
+        string(name: 'requestID', defaultValue: 'REQ123456', description: 'ServiceNow RequestID', )
+       ])
+    ])
+      
+    //powershell 'Write-Host "request print:" ${params.requestID}'
+    //powershell '&("C:\\Program Files\\Python37\\python.exe") C:\\Data\\Scripts\\Python\\publish_jenkins_results.py $Env:JOB_NAME $Env:BUILD_ID -request_id ${params.requestID}'
+    
+    //PowerShell(" ${params.requestID} '${params.requestID}' ")
+    
+    //booleanParam(defaultValue: true, description: '', name: 'userFlag')
+    
+    echo "flag: ${params.requestID}"
+    echo "${params.requestID}"
+    
+    powershell '''
+            
+                Write-Host "request print:" request_id: $env:requestID
+                Write-Host "request print \'request_id: $env:requestID\' "
+                
+                #Write-Host "request print Param(${params.requestID}) "
+                  '''
+                  
+    powershell '&("C:\\Program Files\\Python37\\python.exe") C:\\Data\\Scripts\\Python\\publish_jenkins_results.py $Env:JOB_NAME $Env:BUILD_ID $env:requestID'                  
+
+    // PowerShell(". '.\\Run-PsFunc.ps1'; Run-PsFunc -VariableA ${params.fruit} \
+    //                                   -VariableB         '${params.groupA}' \
+    //                                   -PfaUser           ${USERNAME} \
+    //                                   -PfaPassword       ${PASSWORD}")
+    
+    def status = powershell(returnStatus: true, script: 'ipconfig')
+    if (status == 0) {
+        // Success!
+        echo "yes successful!"
+        println "yes successful!"
+    }
+    
+    def msg = powershell(returnStdout: true, script: 'Write-Output "PowerShell is mighty!"')
+    println msg
+
+
+  }
+  
+  
+}
