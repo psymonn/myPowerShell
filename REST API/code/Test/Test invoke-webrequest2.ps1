@@ -5,7 +5,8 @@
  
  
     # Global Details
-    $JOB_URL = "$jenkins_url/job/Create%20Text%20File"
+    #$JOB_URL = "$jenkins_url/job/Create%20Text%20File"
+    $JOB_URL = "http://localhost:8080/job/PSHitchHiker%20Pineline"
  
     # Workflow Parameters
     #$jobparams.Add("MachineIP", "SomeString1")
@@ -48,7 +49,8 @@
   Construct URL for Build Request
 #>
     $jobnumber = $null
-    $jobparams = @{Filename= "MyFirstFile"; Message = "what is it"}
+    #$jobparams = @{Filename= "MyFirstFile"; Message = "what is it"}
+    $jobparams = @{requestID= "REQ7659"}
 
     if ($action -eq "start") {
         $tries = 2
