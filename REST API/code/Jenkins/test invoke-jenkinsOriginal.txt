@@ -1,0 +1,39 @@
+Invoke-Jenkins [-action] <Object> [-job] <Object> [[-server] <Object>] [[-UserName] <Object>] [[-apikey] <Object>] [[-jobparams] <Object>] [-usepipelines]  [<CommonParameters>]
+
+**********************************************************************************************************************************************************************************
+import-module Cache
+import-module newtonsoft.json
+
+All working:
+invoke-jenkins -action 77 -job ProjectDemo2%20Pipeline -server "http://localhost:8080"
+invoke-jenkins -action attach -job ProjectDemo2%20Pipeline -server "http://localhost:8080"
+
+invoke-jenkins -action start -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ8001'} -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
+invoke-jenkins -action attach -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ8000'}
+invoke-jenkins -action 77 -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ7690'}
+
+invoke-jenkins -action start -job eMailNotifications%20Pipeline -server "http://localhost:8080" -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
+invoke-jenkins -action start -job env%20variables -server "http://localhost:8080" -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
+invoke-jenkins -action start -job WebSite -server "http://localhost:8080" -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
+#currently -usepipelines false won't work just remove it
+#e.g invoke-jenkins -action start -job env%20variables -server "http://localhost:8080" -usepipelines false -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
+ 
+ 
+ **********************************************************************************************************************************************************************************
+ http://localhost:8080/job/PSHitchHiker%20Pineline/66/testReport/api/json?pretty=true
+ http://localhost:8080/job/PSHitchHiker%20Pineline/lastBuild/api/json
+ 
+ http://localhost:8080/job/PSHitchHiker%20Pineline/api/json?pretty=true
+ http://localhost:8080/job/PSHitchHiker%20Pineline/64/console
+ http://localhost:8080/job/PSHitchHiker%20Pineline/api/xml?tree=url,inQueue,queueItem[*]&xpath=//*&wrapper=jobs
+ http://localhost:8080/job/PSHitchHiker%20Pineline/api/xml?xpath=//build[queueId=370]&wrapper=builds&tree=builds[actions,number,queueId]
+ http://localhost:8080/job/PSHitchHiker%20Pineline/66/api/xml?xpath=//*&wrapper=run
+ http://localhost:8080/job/PSHitchHiker%20Pineline/66/wfapi/
+ http://localhost:8080/job/PSHitchHiker%20Pineline/66/consoleText
+ http://localhost:8080/job/PSHitchHiker%20Pineline/66/logText/progressiveHtml?start=0
+ http://localhost:8080/job/PSHitchHiker%20Pineline/api/xml?xpath=//build[building=%27true%27][1]&wrapper=builds&tree=builds[actions,number,queueId,building]
+ This URL enpoint gives you the latest build number:
+ http://localhost:8080/job/PSHitchHiker%20Pineline/api/xml?xpath=//build[1]&wrapper=builds&tree=builds[actions,number,queueId,building]
+ 
+ 
+ 
