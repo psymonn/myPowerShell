@@ -284,7 +284,7 @@ function Invoke-Jenkins {
 
     write-host " result: build: #$jobnumber Status: $($jobdetails.run.result) duration: $($jobdetails.run.duration) requestId: $requestId job: $job"
 
-    $result = @{build=$jobnumber; Status=$($jobdetails.run.result); duration=$($jobdetails.run.duration); requestId = $requestId; job=$job } | ConvertTo-Json
+    $result = @{results=@{build=$jobnumber; Status=$($jobdetails.run.result); duration=$($jobdetails.run.duration); requestId = $requestId; job=$job }} | ConvertTo-Json
     write-host $result
 
 }
