@@ -84,6 +84,7 @@ function Invoke-Jenkins {
   Construct URL for Build Request
 #>
     $jobnumber = $null
+    $requestId = $null
 
 
     if ($action -eq "start") {
@@ -97,6 +98,9 @@ function Invoke-Jenkins {
                     $h
                     $count = $count + 1
                     $url = $url + "$($h.Name)=$([System.Web.HttpUtility]::UrlEncode($h.Value))"
+                    if( $h.name -eq 'requestID' ) {
+                        $requestId = $h.Value
+                    }
                     if (!($count -eq $jobparams.Count)) {
                         $url = $url + "&"
                     }
@@ -276,15 +280,18 @@ function Invoke-Jenkins {
     write-host "=========== END Console output ============="
     write-host ""
 
-    $requestID3 = $h | Where-Object { $_.Key -in ('requestID') }
+#    $requestID3 = $h | Where-Object { $_.Key -in ('requestID') }
 
-    write-host "#$jobnumber result:  $($jobdetails.run.result) duration: $($jobdetails.run.duration) requestId: $requestID3 job: $job"
+    write-host " result: build: #$jobnumber Status: $($jobdetails.run.result) duration: $($jobdetails.run.duration) requestId: $requestId job: $job"
+
+    $result = @{build=$jobnumber; Status=$($jobdetails.run.result); duration=$($jobdetails.run.duration); requestId = $requestId; job=$job } | ConvertTo-Json
+    write-host $result
 
 }
 
 #invoke-jenkins -action start -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ7691'}
-#invoke-jenkins -action attach -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ8002'} -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
-#$request = invoke-jenkins -action start -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ8005'} -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88 -Verbose
+#invoke-jenkins -action attach -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ8003'} -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
+$request = invoke-jenkins -action start -job PSHitchHiker%20Pineline -server "http://localhost:8080" -jobparams @{requestID = 'REQ8007'} -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88 -Verbose
 #invoke-jenkins -action start -job eMailNotifications%20Pipeline -server "http://localhost:8080" -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
 #invoke-jenkins -action start -job env%20variables -server "http://localhost:8080" -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88
 #invoke-jenkins -action start -job WebSite -server "http://localhost:8080" -UserName admin -apikey eb4fa00a67267495c9d747d6c7524b88

@@ -21,7 +21,8 @@ invoke-jenkins -action start -job WebSite -server "http://localhost:8080" -UserN
  
  **********************************************************************************************************************************************************************************
  http://localhost:8080/job/PSHitchHiker%20Pineline/66/testReport/api/json?pretty=true
- http://localhost:8080/job/PSHitchHiker%20Pineline/lastBuild/api/json
+ http://localhost:8080/job/PSHitchHiker%20Pineline/66/testReport/api/json?pretty=true
+ http://localhost:8080//job/TestMeOut%20TFS//api/json?tree=lastSuccessfulBuild[id,displayname]
  
  http://localhost:8080/job/PSHitchHiker%20Pineline/api/json?pretty=true
  http://localhost:8080/job/PSHitchHiker%20Pineline/64/console
