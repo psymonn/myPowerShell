@@ -1,0 +1,18 @@
+}catch{
+                
+                Write-Verbose -Message "Verification failed, throwing error."
+                
+                [string] $errorMessage = (
+                    "Could not confirm 'blabla' was modified. " +
+                    "Please check that it was modified correctly."
+                )
+
+                $PSCmdlet.ThrowTerminatingError(
+                    [System.Management.Automation.ErrorRecord]::new(
+                        ([System.NotImplementedException] $errorMessage),
+                        'ModifyValidateFailed',
+                        [System.Management.Automation.ErrorCategory]::OpenError,
+                        $CheckBoundaryName
+                    )
+                )
+            }
