@@ -284,8 +284,11 @@ function Invoke-Jenkins {
 
     write-host " result: build: #$jobnumber Status: $($jobdetails.run.result) duration: $($jobdetails.run.duration) requestId: $requestId job: $job"
 
-    $result = @{results=@{build=$jobnumber; Status=$($jobdetails.run.result); duration=$($jobdetails.run.duration); requestId = $requestId; job=$job }} | ConvertTo-Json
-    write-host $result
+
+    $result = @{results = @{build = $jobnumber; Status = $($jobdetails.run.result); duration = $($jobdetails.run.duration); requestId = $requestId; job = $job }} | ConvertTo-Json
+    $json = new-object -TypeName psobject $result
+    Write-Output $json
+    #Write-Output $json | tee-object  -filepath c:\scripts\pipelineTest3.txt -append
 
 }
 
