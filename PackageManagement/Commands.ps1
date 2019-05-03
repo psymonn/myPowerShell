@@ -86,6 +86,7 @@ Get-Module -Name ContosoServer -ListAvailable
 Publish-Module -Name ContosoServer -RequiredVersion 1.5 -Repository LocalRepo -NuGetApiKey Local-Repo-NuGet-ApiKey
 Publish-Module -Path "C:\Program Files\WindowsPowerShell\Modules\ContosoServer\2.0" -Repository LocalRepo -NuGetApiKey Local-Repo-NuGet-ApiKey
 Find-Module -Name ContosoServer -Repository LocalRepo
+Save-Module -Repository "Artifactory" -name "SeleniumWin" -path "c:\data\test" -credential test.user9
 ------------
 Dependency:
 PS F:\GitHub\Source\PSHitchhiker> Find-Module -Repository LocalNuGetFeed -Name PSHitchhiker -IncludeDependencies |select version,name,repository
