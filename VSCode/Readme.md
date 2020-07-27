@@ -1,4 +1,3 @@
-"
 First get commit id
 Download vscode server from url: https://update.code.visualstudio.com/commit:${commit_id}/server-linux-x64/stable
 Upload the vscode-server-linux-x64.tar.gz to server
@@ -15,4 +14,3 @@ mkdir -p ~/.vscode-server/bin/${commit_id}
 # assume that you upload vscode-server-linux-x64.tar.gz to /tmp dir
 tar zxvf /tmp/vscode-server-linux-x64.tar.gz -C ~/.vscode-server/bin/${commit_id} --strip 1
 touch ~/.vscode-server/bin/${commit_id}/0
-"
