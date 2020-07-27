@@ -1,5 +1,6 @@
 
 PART1: 
+
 Setup RSA Token, so you don't have to enter your password to login to the Linux server:
 ssh-keygen -t rsa -b 4096 -f %USERPROFILE%/.ssh/debian_rsa
 scp -P 2222 %USERPROFILE%/.ssh/debian_rsa.pub atoz@192.168.0.106:~/key.pub
@@ -17,6 +18,7 @@ Now config vscode remote-ssh (see below)
 ------------------------
 
 PART2:
+
 Manually setup Remote-SSH offline:
 1. download remote-SSH from vscode marketplace and install it
 2. Goto your linux server home directory and follow the instruction to extract the vscode-server from below
