@@ -52,3 +52,10 @@ mkdir -p ~/.vscode-server/bin/${commit_id}
 # assume that you upload vscode-server-linux-x64.tar.gz to /tmp dir
 tar zxvf /tmp/vscode-server-linux-x64.tar.gz -C ~/.vscode-server/bin/${commit_id} --strip 1
 touch ~/.vscode-server/bin/${commit_id}/0
+
+Plugins:
+run in powershell
+xml to json
+json to csv
+json tree view
+convert yaml to json (vice versa)
