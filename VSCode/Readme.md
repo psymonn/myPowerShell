@@ -1,3 +1,12 @@
+Manually setup Remote-SSH offline:
+1. download remote-SSH from vscode marketplace and install it
+2. Goto your linux server home directory and follow the instruction to extract the vscode-server from below
+3. goto your vscode on windows and setup remote-SSH config
+4. now execture remote-ssh from vscode
+5. done
+
+
+
 First get commit id
 Download vscode server from url: https://update.code.visualstudio.com/commit:${commit_id}/server-linux-x64/stable
 Upload the vscode-server-linux-x64.tar.gz to server
