@@ -1,3 +1,5 @@
+https://samcogan.com/building-azure-scale-set-images-with-packer-and-dsc/
+
 <# Init Log #>;
 Start-Transcript -Path 'C:/Automation/setup.txt' -append;
 <#$DebugPreference = 'Continue' #>;
