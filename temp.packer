@@ -1,0 +1,67 @@
+<# Init Log #>;
+Start-Transcript -Path 'C:/Automation/setup.txt' -append;
+<#$DebugPreference = 'Continue' #>;
+<#$VerbosePreference = 'Continue'; #>;
+$InformationPreference = 'Continue';
+
+# Disable group policies which block basic authentication and unencrypted login
+#You will get error out, because it is currently unconfigured hence no value on registry
+Set-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Windows\WinRM\Client -Name AllowBasic -Value 1
+Set-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Windows\WinRM\Client -Name AllowUnencryptedTraffic -Value 1
+Set-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Windows\WinRM\Service -Name AllowBasic -Value 1
+Set-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Windows\WinRM\Service -Name AllowUnencryptedTraffic -Value 1
+
+$path = 'HKLM:\Software\Policies\Microsoft\Windows\WinRM\Service'
+$key = try {
+    Get-Item -Path $path -ErrorAction Stop
+}
+catch {
+    New-Item -Path $path -Force
+}
+New-ItemProperty -Path $key.PSPath -Name AllowBasic -Value 1
+New-ItemProperty -Path $key.PSPath -Name AllowUnencryptedTraffic -Value 1
+
+$path = 'HKLM:\Software\Policies\Microsoft\Windows\WinRM\Client'
+$key = try {
+    Get-Item -Path $path -ErrorAction Stop
+}
+catch {
+    New-Item -Path $path -Force
+}
+New-ItemProperty -Path $key.PSPath -Name AllowBasic -Value 1
+New-ItemProperty -Path $key.PSPath -Name AllowUnencryptedTraffic -Value 1
+
+
+
+# Configure UAC to allow privilege elevation in remote shells
+$Key = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+#$Setting = 'LocalAccountTokenFilterPolicy'
+#Set-ItemProperty -Path $Key -Name $Setting -Value 1 -Force
+
+#- Needs to be elavated as admin (reason because we can't run wimrm remotely):
+#  -by disable UAC via registry only! (gpo update didn't work)
+Set-ItemProperty -Path $Key -Name EnableLUA -Value 0 -Force
+
+
+$SM_Key = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager'
+
+$NetworkListManager = [Activator]::CreateInstance([Type]::GetTypeFromCLSID([Guid]"{DCB00C01-570F-4A9B-8D69-199FDBA5723B}"))
+$Connections = $NetworkListManager.GetNetworkConnections()
+$Connections | ForEach-Object { $_.GetNetwork().SetCategory(1) }
+
+Enable-PSRemoting -Force
+winrm quickconfig -q
+winrm quickconfig -transport:http
+winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="800"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/service/auth '@{Basic="true"}'
+winrm set winrm/config/client/auth '@{Basic="true"}'
+winrm set winrm/config/listener?Address=*+Transport=HTTP '@{Port="5985"}'
+netsh advfirewall firewall set rule group="Windows Remote Administration" new enable=yes
+netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=allow
+Set-Service winrm -startuptype "auto"
+Restart-Service winrm
+
+#turn off firewall completely:
+#https://www.brighthub.com/computing/windows-platform/articles/36282/
