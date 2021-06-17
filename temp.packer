@@ -1,5 +1,6 @@
 https://samcogan.com/building-azure-scale-set-images-with-packer-and-dsc/
 https://github.com/dsccommunity/xPSDesiredStateConfiguration
+https://www.altaro.com/vmware/azure-dsc-terraform-customize-vsphere-vms/
 
 <# Init Log #>;
 Start-Transcript -Path 'C:/Automation/setup.txt' -append;
