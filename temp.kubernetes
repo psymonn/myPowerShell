@@ -404,14 +404,14 @@ kube-system     kube-scheduler-master-node-01                                1/1
 [root@master-node docker]# vi daemon.json
 [root@master-node etc]# cat /etc/docker/daemon.json
 {
-  "registry-mirrors": ["http://artifactory.ag.acorn.irad-launchpad.com"]
+  "registry-mirrors": ["http://artifactory.balabal.com"]
 }
 [root@master-node docker]#  sudo systemctl daemon-reload
 [root@master-node docker]# systemctl restart docker
-[root@master-node docker]# docker login artifactory.ag.acorn.irad-launchpad.com
+[root@master-node docker]# docker login artifactory.balabal.com
 Username: admin
 Password:
-Error response from daemon: Get https://artifactory.ag.acorn.irad-launchpad.com/v2/: dial tcp 172.17.5.162:443: connect: connection refused
+Error response from daemon: Get https://artifactory.balabal.com/v2/: dial tcp 172.17.5.162:443: connect: connection refused
 check!!!!!!!!!!!!!!
 
 TO DO LIST:
