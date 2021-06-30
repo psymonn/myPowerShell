@@ -431,28 +431,9 @@ start kubelet
 check .kube\config is there, other wise you'll get confuse to connect on port 8080
 
 
-----------
-[root@master-node ~]# cat .cicd.env
-export DB_PASSWORD=Passw0rd32
-export POSTGRES_PASSWORD=Passw0rd32
-export JENKINS_ADMIN_PASSWORD=Passw0rd32
-export ARTIFACTORY_ADMIN_PASSWORD=Passw0rd32
-export CROWD_APP_PASSWORD=Passw0rd32
-export ANCHORE_ADMIN_PASSWORD=Passw0rd32
-export JFROG_XRAY_RABBITMQ_PASSWORD=Passw0rd32
-export ANCHORE_CLI_USER=admin
-export ANCHORE_CLI_PASS=Passw0rd32
-export ANCHORE_CLI_URL=http://anchore-api.devops.test/v1/
-export ANCHORE_CLI_INTERNAL_URL=http://anchore-engine-anchore-engine-api.cicd.svc.cluster.local:8228/v1/
-export JFROG_XRAY_RABBITMQ_PASSWORD=Passw0rd32
-
 ----
 curl commands:
  curl --insecure -sfL https://172.17.5.162:444/v3/import/wkkmkg9gzzprk7b85cfnsrz6jrrsqh2cx9kwrfl94sbdzxq4blm5np_c-hx8qc.yaml | kubectl apply -f -
-
-
-helm install sonarqube-postgresql --set postgresqlUsername=sonarqubedbuser,postgresqlPassword=$DB_PASSWORD,postgresqlDatabase=sonarqubedb,resources.requests.cpu=50m     bitnami/postgresql --namespace cicd
-
 
 
 
