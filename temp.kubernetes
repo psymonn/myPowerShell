@@ -1,0 +1,468 @@
+Install kubernetes with Bare-metal Kubernetes with Kubeadm, NGINX ingress controller and HAProxy
+
+https://itnext.io/bare-metal-kubernetes-with-kubeadm-nginx-ingress-controller-and-haproxy-bb0a7ef29d4e
+
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+sudo modprobe overlay
+sudo modprobe br_netfilter
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+EOF
+sudo sysctl --system
+sudo apt-get update && sudo apt-get install -y containerd
+sudo mkdir -p /etc/containerd
+sudo containerd config default | sudo tee /etc/containerd/config.toml
+sudo systemctl restart containerd
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+sudo apt-get update
+sudo apt-get install -y kubelet=1.19.7-00 kubeadm=1.19.7-00 kubectl=1.19.7-00
+sudo apt-mark hold kubelet kubeadm kubectl
+
+root@master-node-01:/var/lib#  kubeadm init
+[init] Using Kubernetes version: v1.21.2
+[preflight] Running pre-flight checks
+        [WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local master-node-01] and IPs [10.96.0.1 172.17.5.162]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [localhost master-node-01] and IPs [172.17.5.162 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [localhost master-node-01] and IPs [172.17.5.162 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[apiclient] All control plane components are healthy after 18.503652 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config-1.21" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node master-node-01 as control-plane by adding the labels: [node-role.kubernetes.io/master(deprecated) node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node master-node-01 as control-plane by adding the taints [node-role.kubernetes.io/master:NoSchedule]
+[bootstrap-token] Using token: vszbxj.e5seao0p7ak6vl6v
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+-------------------------------------------------------------------------------------------
+Then you can join any number of worker nodes by running the following on each as root:
+-------------------------------------------------------------------------------------------
+
+kubeadm join 172.17.5.162:6443 --token vszbxj.e5seao0p7ak6vl6v \
+        --discovery-token-ca-cert-hash sha256:e1fcc6e39c225b69ee0fab41b62a424cd642e78eb1820efe01c7f94ba02aa965
+root@master-node-01:/var/lib#
+
+------------------------------------------
+get access to kubernetes cli:
+--------------------------------------------
+Note: error display if you don't:
+root@master-node-01:~/myKubernetes# kubectl get pods -A
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+[root@master-node ~]# mkdir -p $HOME/.kube
+[root@master-node ~]# cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+[root@master-node ~]# chown $(id -u):$(id -g) $HOME/.kube/config
+[root@master-node ~]# kubectl get nodes
+
+--------
+join all nodes to master (got from kubeadm init from above):
+kubeadm join 172.17.5.162:6443 --token vszbxj.e5seao0p7ak6vl6v --discovery-token-ca-cert-hash sha256:e1fcc6e39c225b69ee0fab41b62a424cd642e78eb1820efe01c7f94ba02aa965
+
+setup ingress controller (This method setup as NodePort not LoadBalancer, which the port have direct access from browser - this is what I want ):
+---------------------------
+root@master-node-01:~/myKubernetes# wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/baremetal/deploy.yaml
+--2021-06-29 04:09:03--  https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/baremetal/deploy.yaml
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.111.133, 185.199.108.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.111.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 18331 (18K) [text/plain]
+Saving to: 'deploy.yaml'
+
+deploy.yaml                                                                                100%[=====================================================================================================================================================================================================================================>]  17.90K  --.-KB/s    in 0.001s
+
+2021-06-29 04:09:03 (11.9 MB/s) - 'deploy.yaml' saved [18331/18331]
+
+root@master-node-01:~/myKubernetes# ls -ltr
+total 20
+-rw-r--r-- 1 root root 18331 Jun 29 04:09 deploy.yaml
+root@master-node-01:~/myKubernetes# kubectl create ns ingress-nginx
+namespace/ingress-nginx created
+root@master-node-01:~/myKubernetes# ls -ltr
+total 20
+-rw-r--r-- 1 root root 18331 Jun 29 04:09 deploy.yaml
+root@master-node-01:~/myKubernetes# less deploy.yaml
+
+[1]+  Stopped                 less deploy.yaml
+root@master-node-01:~/myKubernetes#  kubectl apply -f deploy.yaml
+Warning: resource namespaces/ingress-nginx is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+namespace/ingress-nginx configured
+serviceaccount/ingress-nginx created
+configmap/ingress-nginx-controller created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+service/ingress-nginx-controller-admission created
+service/ingress-nginx-controller created
+deployment.apps/ingress-nginx-controller created
+validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
+serviceaccount/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+job.batch/ingress-nginx-admission-create created
+job.batch/ingress-nginx-admission-patch created
+root@master-node-01:~/myKubernetes# kubectl get services -n ingress-nginx
+NAME                                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller             NodePort    10.101.31.240   <none>        80:30183/TCP,443:31264/TCP   6s
+ingress-nginx-controller-admission   ClusterIP   10.105.63.34    <none>        443/TCP                      6s
+
+Note: Type = NodePort not Low Balaner!
+
+---------------------
+setup storage class:
+---------------------
+apt install -y nfs-kernel-server
+apt install -y nfs-common
+
+root@master-node-01:~/myKubernetes# vi /etc/exports
+root@master-node-01:~/myKubernetes# cat /etc/exports
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+#/nfs-export   10.0.0.0/8(rw,sync,no_root_squash,no_subtree_check)
+/nfs-export  *(rw,sync,no_subtree_check,no_root_squash,insecure)
+
+
+root@master-node-01:~/myKubernetes# mkdir -p /nfs-export
+chmod 777 /nfs-export
+root@master-node-01:~/myKubernetes# exportfs -rv  or  exportfs -a 
+root@master-node-01:~# showmount -e   or exportfs
+Export list for master-node-01:
+/nfs-export *
+
+helm repo add stable https://charts.kubesphere.io/main
+helm install stable/nfs-client-provisioner --set nfs.server=172.17.5.162 --set nfs.path=/nfs-export --generate-name -n default
+
+root@master-node-01:~/myKubernetes# kubectl get storageclass
+NAME         PROVISIONER                                       RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+nfs-client   cluster.local/nfs-client-provisioner-1624941016   Delete          Immediate           true                   111s
+
+
+Test app deployment (This didn't work I prefer Sonaqube, works for me, and you can deploy it as CLUSTERIP type (don't have to deploy as NodePort), because I don't need direct access, but will setup ha proxy to low balance):
+root@master-node-01:~/myKubernetes#  git clone https://github.com/drone/charts drone-charts
+root@master-node-01:~/myKubernetes/drone-charts/charts/drone# vi values.yaml
+
+root@master-node-01:~/myKubernetes# helm install drone -n drone ./drone-charts/charts/drone
+W0629 04:39:00.534305   23614 warnings.go:70] networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+W0629 04:39:00.672444   23614 warnings.go:70] networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+NAME: drone
+LAST DEPLOYED: Tue Jun 29 04:39:00 2021
+NAMESPACE: drone
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+1. Get the application URL by running these commands:
+  http://drone.redink.com/
+root@master-node-01:~/myKubernetes# kubectl get ingress -ndrone
+NAME    CLASS    HOSTS              ADDRESS        PORTS   AGE
+drone   <none>   drone.redink.com   172.17.5.162   80      33s
+
+root@master-node-01:~/myKubernetes# kubectl get svc -n drone
+NAME    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+drone   NodePort   10.110.221.132   <none>        80:31217/TCP   5m16s
+
+---
+change vi colour:
+vi file then
+:color desert
+
+debug:
+journalctl -xe
+
+------------------------------------------------------------------------------
+Add HAProxy as an edge load balancer in front of the NGINX ingress controller
+-------------------------------------------------------------------------------
+sudo apt install -y haproxy
+haproxy -v
+
+I edited /etc/haproxy/haproxy.cfg and added the following lines below the global and default sections which were already included by default:
+
+root@master-node-01:~/source/kuberenetes_cicd-lp-175/02_install# cat /etc/haproxy/haproxy.cfg
+global
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        chroot /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats timeout 30s
+        user haproxy
+        group haproxy
+        daemon
+
+        # Default SSL material locations
+        ca-base /etc/ssl/certs
+        crt-base /etc/ssl/private
+
+        # Default ciphers to use on SSL-enabled listening sockets.
+        # For more information, see ciphers(1SSL). This list is from:
+        #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+        # An alternative list with additional directives can be obtained from
+        #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
+        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+        ssl-default-bind-options no-sslv3
+
+defaults
+        log     global
+        mode    http
+        option  httplog
+        option  dontlognull
+        timeout connect 5000
+        timeout client  50000
+        timeout server  50000
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
+
+frontend front_nginx_ingress_controller
+  bind *:80
+# acl nginx_ingress_controller_service hdr(host) -m reg -i ^[^\.]+\.ag\.acorn\.irad\-launchpad\.com(:[0-9]+)?$
+  #acl valid_domains hdr(host) -m reg -i ^[^\.]+\.ag\.acorn\.irad-launchpad\.com$
+  #acl valid_domains hdr(host) -m reg -i ^[^\.]+\.minikube\.ag\.acorn\.irad-launchpad\.com$
+
+  #acl valid_domains hdr_end(host) -i ag.acorn.irad-launchpad.com + acl valid_domains hdr_end(host) -i minikube.ag.acorn.irad-launchpad.com
+  #acl valid_domains hdr_end(host) -i ag.acorn.irad-launchpad.com
+  #acl valid_domains hdr_dom(host) -i ag.acorn.irad-launchpad.com
+
+   # redirect location http://mysite.com/invalid_domain if !valid_domains
+#  bind 172.17.5.162:443
+#  bind 172.17.5.162:444
+#  bind 172.17.5.162:443 ssl crt /etc/ssl/certs/ca-certificates.crt
+#  http-request redirect scheme https unless { ssl_fc }
+  default_backend nginx_ingress_controller_service
+
+backend nginx_ingress_controller_service
+  balance roundrobin
+  server master-node-01  172.17.5.162:31298
+  server worker-node-01  172.17.5.163:31298
+  server worker-node-02  172.17.5.164:31298
+root@master-node-01:~/source/kuberenetes_cicd-lp-175/02_install#
+
+sudo service haproxy restart
+
+update dns server on all nodes:
+root@worker-node-01:~# vi /etc/netplan/50-cloud-init.yaml
+root@worker-node-01:~#  sudo netplan apply
+
+ 
+---------------------------------------------------------------------------
+-----------------
+Ha Proxy Sample:
+-----------------
+global
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+frontend http_front
+  bind *:80
+  stats uri /haproxy?stats
+  default_backend http_back
+
+backend http_back
+  balance roundrobin
+  server worker 172.31.89.165:80
+
+----------------------
+
+root@master-node-01:/etc/haproxy# kubectl get pods -A
+NAMESPACE       NAME                                                         READY   STATUS      RESTARTS   AGE
+cattle-system   cattle-cluster-agent-7955758c7c-p9wgx                        1/1     Running     0          6h5m
+cicd            anchore-cli                                                  1/1     Running     1          4h25m
+cicd            anchore-engine-anchore-engine-analyzer-85886f5549-957v9      1/1     Running     0          4h34m
+cicd            anchore-engine-anchore-engine-api-c76cb64bb-jbwg2            1/1     Running     0          4h34m
+cicd            anchore-engine-anchore-engine-catalog-756db4f48f-s5mr2       1/1     Running     0          4h34m
+cicd            anchore-engine-anchore-engine-policy-74648cbc45-wh469        1/1     Running     0          4h34m
+cicd            anchore-engine-anchore-engine-simplequeue-6cf9cdcd44-kgtrn   1/1     Running     0          4h34m
+cicd            anchore-engine-engine-upgrade-pzcrm                          0/1     Completed   0          94m
+cicd            anchore-postgresql-postgresql-0                              1/1     Running     0          4h37m
+cicd            artifactory-artifactory-0                                    1/1     Running     0          108m
+cicd            artifactory-postgresql-postgresql-0                          1/1     Running     0          111m
+cicd            jenkins-8dc5cb9b8-5bm8t                                      1/1     Running     0          45m
+cicd            sonarqube-postgresql-postgresql-0                            1/1     Running     0          6h24m
+cicd            sonarqube-sonarqube-68557dc5d-8942l                          1/1     Running     0          6h18m
+default         nfs-client-provisioner-1624943903-85959f8fd8-v8vxl           1/1     Running     15         8h
+fleet-system    fleet-agent-d59db746-cd4w6                                   1/1     Running     0          6h4m
+ingress-nginx   ingress-nginx-admission-create-rgkkf                         0/1     Completed   0          5h41m
+ingress-nginx   ingress-nginx-admission-patch-lm4b6                          0/1     Completed   0          5h41m
+ingress-nginx   ingress-nginx-controller-55bc4f5576-46d58                    1/1     Running     0          5h41m
+kube-system     calico-kube-controllers-78d6f96c7b-ghd52                     1/1     Running     0          9h
+kube-system     calico-node-gz55w                                            1/1     Running     0          9h
+kube-system     calico-node-jh5c2                                            1/1     Running     0          9h
+kube-system     calico-node-lkd9f                                            1/1     Running     0          9h
+kube-system     coredns-558bd4d5db-pfcjg                                     1/1     Running     0          9h
+kube-system     coredns-558bd4d5db-sj9ts                                     1/1     Running     0          9h
+kube-system     etcd-master-node-01                                          1/1     Running     0          9h
+kube-system     kube-apiserver-master-node-01                                1/1     Running     0          9h
+kube-system     kube-controller-manager-master-node-01                       1/1     Running     25         9h
+kube-system     kube-proxy-cmzc6                                             1/1     Running     0          9h
+kube-system     kube-proxy-mwxjb                                             1/1     Running     0          9h
+kube-system     kube-proxy-tv9hx                                             1/1     Running     0          9h
+kube-system     kube-scheduler-master-node-01                                1/1     Running     25         9h
+
+-------------
+[root@master-node docker]# vi daemon.json
+[root@master-node etc]# cat /etc/docker/daemon.json
+{
+  "registry-mirrors": ["http://artifactory.ag.acorn.irad-launchpad.com"]
+}
+[root@master-node docker]#  sudo systemctl daemon-reload
+[root@master-node docker]# systemctl restart docker
+[root@master-node docker]# docker login artifactory.ag.acorn.irad-launchpad.com
+Username: admin
+Password:
+Error response from daemon: Get https://artifactory.ag.acorn.irad-launchpad.com/v2/: dial tcp 172.17.5.162:443: connect: connection refused
+check!!!!!!!!!!!!!!
+
+TO DO LIST:
+certificate and ssl
+wild card for subdomain
+jenkins - needs artifactory
+check why everything deploy to 172.17.5.162
+check nfs could be setup on nas server
+jenkins pipeline and openscap
+install postgres on a standalone database server
+
+--------------
+tips:
+if kubernetes is not up check:
+no swap file in fstab just comment it out
+start kubelet
+check .kube\config is there, other wise you'll get confuse to connect on port 8080
+
+
+----------
+[root@master-node ~]# cat .cicd.env
+export DB_PASSWORD=Passw0rd32
+export POSTGRES_PASSWORD=Passw0rd32
+export JENKINS_ADMIN_PASSWORD=Passw0rd32
+export ARTIFACTORY_ADMIN_PASSWORD=Passw0rd32
+export CROWD_APP_PASSWORD=Passw0rd32
+export ANCHORE_ADMIN_PASSWORD=Passw0rd32
+export JFROG_XRAY_RABBITMQ_PASSWORD=Passw0rd32
+export ANCHORE_CLI_USER=admin
+export ANCHORE_CLI_PASS=Passw0rd32
+export ANCHORE_CLI_URL=http://anchore-api.devops.test/v1/
+export ANCHORE_CLI_INTERNAL_URL=http://anchore-engine-anchore-engine-api.cicd.svc.cluster.local:8228/v1/
+export JFROG_XRAY_RABBITMQ_PASSWORD=Passw0rd32
+
+----
+curl commands:
+ curl --insecure -sfL https://172.17.5.162:444/v3/import/wkkmkg9gzzprk7b85cfnsrz6jrrsqh2cx9kwrfl94sbdzxq4blm5np_c-hx8qc.yaml | kubectl apply -f -
+
+
+helm install sonarqube-postgresql --set postgresqlUsername=sonarqubedbuser,postgresqlPassword=$DB_PASSWORD,postgresqlDatabase=sonarqubedb,resources.requests.cpu=50m     bitnami/postgresql --namespace cicd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
