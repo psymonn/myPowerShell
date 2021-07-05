@@ -17,4 +17,71 @@ $ kubectl get pv,pvc,pods
 kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller
 
 
-helm upgrade --install --dry-run  moodle-b1 bitnami/moodle --namespace moodle --create-namespace --set moodlePassword=Passw0rd32 --set mariadb.auth.rootPassword=**** --set mariadb.auth.password=**** -f .\values\moodle-values-b1.yaml > notepad.txt
+helm upgrade --install --dry-run  moodle-b1 bitnami/moodle --namespace moodle --create-namespace --set moodlePassword=*** --set mariadb.auth.rootPassword=***--set mariadb.auth.password=*** -f .\values\moodle-values-b1.yaml > notepad.txt
+
+
+
+
+
+root@worker-node-01:/var/www/wisdompetmed.local/test# curl -I -k http://moodle.server.com/b1/login
+HTTP/1.1 301 Moved Permanently
+Date: Mon, 05 Jul 2021 12:06:25 GMT
+Content-Type: text/html; charset=iso-8859-1
+Location: http://moodle.server:8080/login/
+
+
+
+root@worker-node-01:/var/www/wisdompetmed.local/test# curl -I -k http://moodle.server.com/b1
+HTTP/1.1 200 OK
+Date: Mon, 05 Jul 2021 12:56:07 GMT
+Content-Type: text/html; charset=utf-8
+X-Powered-By: PHP/7.3.28
+Set-Cookie: MoodleSession=5t9o7m71olfkrucc5s25glrbh8; path=/
+Expires: Mon, 20 Aug 1969 09:23:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Content-Language: en
+Content-Script-Type: text/javascript
+Content-Style-Type: text/css
+X-UA-Compatible: IE=edge
+Cache-Control: post-check=0, pre-check=0, no-transform
+Last-Modified: Mon, 05 Jul 2021 12:56:07 GMT
+Accept-Ranges: none
+X-Frame-Options: sameorigin
+
+
+
+root@worker-node-01:/var/www/wisdompetmed.local/test# curl -I -k 172.17.5.163/b1
+HTTP/1.1 200 OK
+Server: nginx/1.14.0 (Ubuntu)
+Date: Mon, 05 Jul 2021 12:00:19 GMT
+Content-Type: text/html
+Content-Length: 12853
+Last-Modified: Tue, 06 Jan 2015 19:25:36 GMT
+Connection: keep-alive
+ETag: "54ac36b0-3235"
+Accept-Ranges: bytes
+
+
+
+
+root@worker-node-01:/var/www/wisdompetmed.local/test# curl -I -k 172.17.5.163/b1/test
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.14.0 (Ubuntu)
+Date: Mon, 05 Jul 2021 11:23:37 GMT
+Content-Type: text/html
+Content-Length: 194
+Location: http://172.17.5.163/test/
+Connection: keep-alive
+
+
+
+root@worker-node-01:/var/www/wisdompetmed.local/test# curl -I -k 172.17.5.163/b1/images
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.14.0 (Ubuntu)
+Date: Mon, 05 Jul 2021 11:23:33 GMT
+Content-Type: text/html
+Content-Length: 194
+Location: http://172.17.5.163/images/
+Connection: keep-alive
+
