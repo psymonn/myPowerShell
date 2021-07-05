@@ -1,0 +1,51 @@
+root@worker-node-01:/etc/nginx/conf.d# vi wisdompetmed.local.conf
+
+[4]+  Stopped                 vi wisdompetmed.local.conf
+root@worker-node-01:/etc/nginx/conf.d# vi wisdompetmed.local.conf
+server {
+    listen 80 default_server;
+    server_name 172.17.5.63 wisdompetmed.local www.wisdompetmed.local;
+    #return 301 http://$server_name/b1$request_uri;
+    #if ($uri = /) {
+    #   return 302 $scheme://$http_host/b1;
+    #}
+    index index.html index.htm index.php index.txt;
+    root /var/www/wisdompetmed.local;
+    rewrite /b1(/|$)(.*) /$2 break;
+
+    #rewrite / /b1/;
+    #rewrite ^/(/|b1)/(.*) /b1/$1/$2 break;
+
+    access_log /var/log/nginx/wisdompetmed.local.access.log;
+    error_log /var/log/nginx/wisdompetmed.local.error.log;
+
+    location /b1/ {
+        try_files $uri $uri/ = 404;
+    }
+
+
+    location /images {
+        autoindex on;
+        access_log /var/log/nginx/wisdompetmed.images.access.log;
+        error_log /var/log/nginx/wisdompetmed.images.error.log;
+
+   }
+
+   location ~ \.txt$ {
+   }
+
+
+   error_page 404 /404.html;
+   location = /404.html {
+        internal;
+   }
+
+   error_page 500 502 503 504 /50x.html;
+   location = /50x.html {
+        internal;
+   }
+
+   location = /500 {
+        fastcgi_pass unix:/this/will/fail;
+   }
+}
