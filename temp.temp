@@ -1,0 +1,20 @@
+find / -name '*.conf'
+
+kubectl get ingress -n cicd
+
+$ kubectl exec rc-nfs-test-42785 cat /usr/share/nginx/html/index.html
+NFS Works!
+$ kubectl exec rc-nfs-test-rt3ld cat /usr/share/nginx/html/index.html
+NFS Works!.
+
+
+ kubectl get pods,pv,pvc
+NAME       READY     STATUS    RESTARTS   AGE
+po/mypod   1/1       Running   0          3m
+
+$ kubectl get pv,pvc,pods
+
+kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller
+
+
+helm upgrade --install --dry-run  moodle-b1 bitnami/moodle --namespace moodle --create-namespace --set moodlePassword=Passw0rd32 --set mariadb.auth.rootPassword=**** --set mariadb.auth.password=**** -f .\values\moodle-values-b1.yaml > notepad.txt
