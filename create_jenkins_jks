@@ -1,0 +1,7 @@
+Assuming you already signed your certificate by a CA
+
+openssl pkcs12 -export -out jenkins.minikube.ag.acorn.irad-launchpad.com.p12 -passout 'pass:password1' -inkey jenkins.minikube.com.key -in jenkins.minikube.com.crt -certfile DevSecOps_rootCA.pem -name jenkins.minikube.com
+keytool -importkeystore -srckeystore jenkins.minikube.ag.acorn.irad-launchpad.com.p12 -srcstorepass 'password1' -srcstoretype PKCS12 -srcalias jenkins.minikube.com -deststoretype JKS -destkeystore jenkins.minikube.com.jks -deststorepass 'password2' -destalias jenkins.minikube.com
+cat jenkins.minikube.com.jks | base64
+
+
