@@ -1,0 +1,59 @@
+Setup monitoring console alert, you need to update these two files together:
+- dmc_alerts.conf
+- savedsearches.conf
+
+/data/splunk/etc/apps/splunk_monitoring_console/default/dmc_alerts.conf
+
+[DMC Alert - Near Critical Disk Usage - Test]
+enabled_for_light = True
+enabled_for_cloud = False
+is_editable = True
+parameter_labels = Disk Usage (Percentage)
+parameter_values = 80
+parameter_ranges = 1-100
+param_to_search_conversion = * 1
+description_template = You have used {0}% of your disk capacity.
+search_template = | rest splunk_server_group=dmc_group_* /services/server/status/partitions-space \
+| eval free = if(isnotnull(available), available, free) \
+| eval usage = capacity - free \
+| eval pct_usage = floor(usage / capacity * 100) \
+| where pct_usage > {0} \
+| stats first(fs_type) as fs_type first(capacity) AS capacity first(usage) AS usage first(pct_usage) AS pct_usage by splunk_server, mount_point \
+| eval usage = round(usage / 1024, 2) \
+| eval capacity = round(capacity / 1024, 2) \
+| rename splunk_server AS Instance mount_point as "Mount Point", fs_type as "File System Type", usage as "Usage (GB)", capacity as "Capacity (GB)", pct_usage as "Usage (%)"
+
+
+/data/splunk/etc/apps/splunk_monitoring_console/default/savedsearches.conf
+
+
+[DMC Alert - Near Critical Disk Usage Test]
+alert.digest_mode = 1
+alert.expires = 7d
+counttype = number of events
+alert.suppress = 1
+alert.suppress.period = 4h
+alert.track = 1
+action.email.sendresults = 1
+action.email.inline = 1
+cron_schedule = 3,33 * * * *
+description = You have used 80% of your disk capacity.
+disabled = 1
+enableSched = 1
+quantity = 0
+relation = greater than
+search = | rest splunk_server_group=dmc_group_* /services/server/status/partitions-space \
+| eval free = if(isnotnull(available), available, free) \
+| eval usage = capacity - free \
+| eval pct_usage = floor(usage / capacity * 100) \
+| where pct_usage > 80 \
+| stats first(fs_type) as fs_type first(capacity) AS capacity first(usage) AS usage first(pct_usage) AS pct_usage by splunk_server, mount_point \
+| eval usage = round(usage / 1024, 2) \
+| eval capacity = round(capacity / 1024, 2) \
+| rename splunk_server AS Instance mount_point as "Mount Point", fs_type as "File System Type", usage as "Usage (GB)", capacity as "Capacity (GB)", pct_usage as "Usage (%)"
+
+
+https://docs.splunk.com/Documentation/Splunk/8.2.4/DMC/Summary
+https://docs.splunk.com/Documentation/Splunk/8.2.3/DMC/Summary?ref=hk
+https://docs.splunk.com/Documentation/Splunk/8.2.3/DMC/HowtheDMCworks
+https://docs.splunk.com/Documentation/Splunk/8.2.3/DMC/Platformalerts?ref=hk
